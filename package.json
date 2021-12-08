@@ -1,5 +1,5 @@
 {
-  "name": "your-project-name-here-client",
+  "name": "trip-design-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
