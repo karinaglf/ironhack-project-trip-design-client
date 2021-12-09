@@ -1,41 +1,42 @@
-import { useState, useEffect, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/auth.context";
-import axios from "axios"; 
- 
-const API_URL = "http://localhost:5005";
+import { useState, useEffect, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/auth.context';
+import axios from 'axios';
+import TripsCard from '../../components/TripsCard';
 
- function ProfilePage() {
-   const [trips, setTrips] = useState([]);
+const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
-  // Get the function for saving and verifying the token
+function ProfilePage() {
   const { user } = useContext(AuthContext);
-  console.log(user)
-
-   const getTrips = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/api/trips`);
-      setTrips(response.data);
-    } catch(error) {
-      console.log(error);
-    }
-  }; 
-  useEffect(() => {
-    getTrips();
-  }, [] );
+  console.log(user);
 
   return (
     <div>
       <h1>Profile Page</h1>
-
-      {trips.map((oneTrip) => {
-          return (
-            <div key={oneTrip._id} >
-                <h3>{oneTrip.tripName}</h3>
-            </div>
-          );
-        })}     
-      
+      <h2>Hello </h2>
+      <div className="profile-img-wrapper">
+        {user && (
+          <>
+            <img className="profile-img" src={user.image} alt="profile" />
+            <p>{user.email}</p>
+            <p>{user.name}</p>
+            {user.createdTrips.map((oneTrip) => {
+              return (
+                <Link key={oneTrip._id} to={``}>
+                  <div className="trip-list-card">
+                    <div className="trip-card-image-col">
+                      <img src={oneTrip.coverImg} alt="coverImg" width="200"/>
+                    </div>
+                    <div className="trip-card-info-col">
+                      <h3>{oneTrip.tripName}</h3>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </>
+        )}
+      </div>
     </div>
   );
 }

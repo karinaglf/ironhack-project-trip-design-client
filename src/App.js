@@ -1,5 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
 
 import Navbar from "./components/Navbar/Navbar";
 
@@ -13,6 +14,10 @@ import IsPrivate from './components/IsPrivate/IsPrivate';
 import IsAnon from "./components/IsAnon/IsAnon";
 
 function App() {
+  useEffect(() => {
+    document.title = "Trip Design"
+  }, [] );
+
   return (
     <div className="App">
       <Navbar />
