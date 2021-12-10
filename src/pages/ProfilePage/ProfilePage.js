@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
 import axios from 'axios';
-import TripsCard from '../../components/TripsCard';
+import TripsCard from '../../components/TripsCard/TripsCard';
 
 const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
@@ -14,7 +14,7 @@ function ProfilePage() {
     <div>
       <h1>Profile Page</h1>
       <h2>Hello </h2>
-      
+
       <Link to={`/create-trip`}>
         <button>Create Trip</button>
       </Link>
@@ -27,7 +27,7 @@ function ProfilePage() {
             <p>{user.name}</p>
             {user.createdTrips.map((oneTrip) => {
               return (
-                <Link key={oneTrip._id} to={``}>
+                <Link key={oneTrip._id} to={`/trips/${oneTrip._id}`}>
                   <div className="trip-list-card">
                     <div className="trip-card-image-col">
                       <img src={oneTrip.coverImg} alt="coverImg" width="200"/>
