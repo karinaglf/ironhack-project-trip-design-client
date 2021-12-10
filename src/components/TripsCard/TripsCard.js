@@ -1,10 +1,30 @@
-// Deconstructing the props object directly in the parentheses of the function
+import { Link } from 'react-router-dom';
 
-function TripsCard({ tripName }) {
+// Material UI 
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
+
+
+function TripsCard( { tripName, _id, coverImg}) {
     return (
-      <div className="card">
-        <h3>{tripName}</h3>
-      </div>
+      <Link to={`/trips/${_id}`}>
+        <Card sx={{ width: 345 }}>
+              <CardMedia
+                component="img"
+                height="140"
+                image={coverImg}
+                alt="trip cover"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {tripName}
+                </Typography>
+              </CardContent>
+            </Card>
+    </Link>
     );
   }
   
