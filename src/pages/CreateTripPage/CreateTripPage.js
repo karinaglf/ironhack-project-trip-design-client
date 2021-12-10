@@ -8,7 +8,9 @@ function CreateTripPage() {
     const [description, setDescription] = useState("");
     
     return ( 
-        //
+        <div>
+            <h2>Create a Trip Page</h2>
+        </div>
      );
 }
 

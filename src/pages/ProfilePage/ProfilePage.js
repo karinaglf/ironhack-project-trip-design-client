@@ -14,6 +14,11 @@ function ProfilePage() {
     <div>
       <h1>Profile Page</h1>
       <h2>Hello </h2>
+      
+      <Link to={`/create-trip`}>
+        <button>Create Trip</button>
+      </Link>
+
       <div className="profile-img-wrapper">
         {user && (
           <>
