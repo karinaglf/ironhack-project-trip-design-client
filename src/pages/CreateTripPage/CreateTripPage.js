@@ -1,22 +1,26 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../../context/auth.context';
 import {
-  Card,
-  CardContent,
-  Grid,
-  TextField,
-  FormGroup,
-  Button
+    Card,
+    CardContent,
+    Grid,
+    TextField,
+    FormGroup,
+    Button,
+    Input
 } from '@material-ui/core';
 import { Form, Formik, Field } from 'formik';
 import axios from "axios";
+import authService from "../../services/auth.service";
+import fileService from "../../services/file.service";
 
 const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
 function CreateTripPage() {
-  const [id, setId] = useState('');
+  const [ img, setImg] = useState('');
   const { user } = useContext(AuthContext);
   
+
   //Form Initial Values
   const initialValues = {
     tripName: '',
@@ -38,16 +42,36 @@ function CreateTripPage() {
     }
   };
 
+ // Handle File Upload
+  const handleFileUpload = async (e) => {
+    try {
+      const uploadData = new FormData();
+
+      uploadData.append("imageUrl", e.target.files[0]); // <-- set the file in the form
+
+      const response = await fileService.uploadImage(uploadData);
+
+     setImg(response.data.secure_url);
+
+    } catch (error) {
+      console.log(error);
+    }
+
+    // setFieldValue("coverImg", img);
+
+  };
+
   return (
     <div>
       <h2>Create a Trip Page</h2>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        {({ values, errors, isSubmitting, isValidating }) => (
+        {({ values, errors, isSubmitting, isValidating, setFieldValue }) => (
           <Form>
             <FormGroup row={false}>
               <Field name="tripName" as={TextField} label="Trip Name" />
-              <Field name="coverImg" as={TextField} label="Cover Img Url" />
-              <Field name="createdBy" as={TextField} label="Created By" value={id}/>
+              <Input type="file" as={TextField} name="coverImg" onChange={(e) => {handleFileUpload(e); setFieldValue("coverImg", img)}}/>
+              {/* <Field name="coverImg" as={TextField} label="Cover Img Url" /> */}
+              <Field name="createdBy" as={TextField} label="Created By" />
             </FormGroup>
           <Button type="submit" disabled={isSubmitting || isValidating}>Submit</Button>
             <pre>{JSON.stringify(errors, null, 6)}</pre>
