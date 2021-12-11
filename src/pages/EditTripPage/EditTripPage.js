@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 
 const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
-function TripDetailsPage() {
+function EditTripPage() {
     const [trip, setTrip] = useState(null)
 
     const { tripId } = useParams();
@@ -29,10 +29,10 @@ function TripDetailsPage() {
         <div className="">
         {trip && (
           <>
-            <h1>Details: {trip.tripName}</h1>
+            <h1>EDIT TRIP: {trip.tripName}</h1>
   
             <Link to={`/trips/edit/${trip._id}`}>
-                <button>Edit Project</button>
+              <button>Edit Project</button>
             </Link>
           </>  
         )}
@@ -40,4 +40,4 @@ function TripDetailsPage() {
      );
 }
 
-export default TripDetailsPage;
+export default EditTripPage;

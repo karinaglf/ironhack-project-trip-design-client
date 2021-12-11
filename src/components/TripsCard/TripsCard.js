@@ -1,31 +1,60 @@
 import { Link } from 'react-router-dom';
+import tripsService from '../../services/file.service';
+import axios from 'axios';
 
-// Material UI 
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
+// Material UI
+import {
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  CardActions,
+  Typography,
+} from '@material-ui/core';
+
+const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
+
+function TripsCard({ tripName, _id, coverImg }) {
 
 
-function TripsCard( { tripName, _id, coverImg}) {
-    return (
-      <Link to={`/trips/${_id}`}>
-        <Card sx={{ maxWidth: 345 }}>
-              <CardMedia
-                component="img"
-                height="140"
-                image={coverImg}
-                alt="trip cover"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {tripName}
-                </Typography>
-              </CardContent>
-            </Card>
-    </Link>
-    );
-  }
-  
-  export default TripsCard;
+  const deleteTrip = async () => {
+    try {
+      console.log('Clicked');
+      await axios.delete(`${API_URL}/api/trips/${_id}`);
+
+      console.log(`ID OF TRE TRIP`, _id);
+      console.log('----------');
+    } catch (error) {
+      console.log('Error while deleting trip');
+    }
+  };
+
+  return (
+    <Card sx={{ maxWidth: 345 }}>
+      <CardMedia
+        component="img"
+        height="160"
+        image={coverImg}
+        alt="trip cover"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {tripName}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small" href={`/trips/${_id}`}>
+          Details
+        </Button>
+        <Button size="small" href={`/trips/edit/${_id}`}>
+          Edit
+        </Button>
+        <Button size="small" onClick={deleteTrip}>
+          Remove
+        </Button>
+      </CardActions>
+    </Card>
+  );
+}
+
+export default TripsCard;

@@ -28,10 +28,10 @@ function ProfilePage() {
             <img className="profile-img" src={user.image} alt="profile" />
             <p>{user.email}</p>
             <p>{user.name}</p>
-            <Grid container spacing={6} justify="center">
+            <Grid container spacing={6}>
             {user.createdTrips.map((oneTrip) => (
-              <Grid item xs={6} md={3}>
-                <TripsCard key={oneTrip._id} {...oneTrip} /> 
+              <Grid key={oneTrip._id} item xs={6} md={3}>
+                <TripsCard {...oneTrip} /> 
               </Grid>
             )
             )}
