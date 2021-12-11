@@ -23,8 +23,8 @@ function CreateTripPage() {
   //Form Initial Values
   const initialValues = {
     tripName: '',
-    coverImg: '',
-    createdBy: '',
+    coverImg: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800',
+    createdBy: user._id,
   };
 
   //Handle Submit
@@ -71,7 +71,6 @@ function CreateTripPage() {
                 name="coverImg"
                 onChange={(e) => handleFileUpload(e, setFieldValue)}
               />
-              <Field name="createdBy" as={TextField} label="Created By" />
             </FormGroup>
             <Button type="submit" disabled={isSubmitting || isValidating}>
               Submit

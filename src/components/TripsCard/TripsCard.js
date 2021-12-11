@@ -16,14 +16,9 @@ const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
 function TripsCard({ tripName, _id, coverImg }) {
 
-
   const deleteTrip = async () => {
     try {
-      console.log('Clicked');
       await axios.delete(`${API_URL}/api/trips/${_id}`);
-
-      console.log(`ID OF TRE TRIP`, _id);
-      console.log('----------');
     } catch (error) {
       console.log('Error while deleting trip');
     }
