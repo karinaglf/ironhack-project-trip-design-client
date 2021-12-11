@@ -43,7 +43,7 @@ function CreateTripPage() {
   };
 
  // Handle File Upload
-  const handleFileUpload = async (e) => {
+  const handleFileUpload = async (e, setFieldValue) => {
     try {
       const uploadData = new FormData();
 
@@ -51,13 +51,14 @@ function CreateTripPage() {
 
       const response = await fileService.uploadImage(uploadData);
 
-     setImg(response.data.secure_url);
+    //  setImg(response.data.secure_url);
+     
+     setFieldValue("coverImg", response.data.secure_url);
 
     } catch (error) {
       console.log(error);
     }
 
-    // setFieldValue("coverImg", img);
 
   };
 
@@ -65,12 +66,11 @@ function CreateTripPage() {
     <div>
       <h2>Create a Trip Page</h2>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        {({ values, errors, isSubmitting, isValidating, setFieldValue }) => (
+        {({ values, errors, isSubmitting, isValidating, handleChange, setFieldValue }) => (
           <Form>
             <FormGroup row={false}>
               <Field name="tripName" as={TextField} label="Trip Name" />
-              <Input type="file" as={TextField} name="coverImg" onChange={(e) => {handleFileUpload(e); setFieldValue("coverImg", img)}}/>
-              {/* <Field name="coverImg" as={TextField} label="Cover Img Url" /> */}
+              <Input type="file" as={TextField} name="coverImg" onChange={(e) => handleFileUpload(e, setFieldValue)}/>
               <Field name="createdBy" as={TextField} label="Created By" />
             </FormGroup>
           <Button type="submit" disabled={isSubmitting || isValidating}>Submit</Button>
