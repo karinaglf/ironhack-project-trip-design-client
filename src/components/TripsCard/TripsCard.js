@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 function TripsCard( { tripName, _id, coverImg}) {
     return (
       <Link to={`/trips/${_id}`}>
-        <Card sx={{ width: 345 }}>
+        <Card sx={{ maxWidth: 345 }}>
               <CardMedia
                 component="img"
                 height="140"
