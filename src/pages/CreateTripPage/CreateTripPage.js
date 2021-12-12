@@ -33,15 +33,21 @@ function CreateTripPage() {
     coverMsg: ''
   };
 
+  //Form Validation Schema
+  const validationSchema = Yup.object({
+    //
+  })
+
   //Handle Submit
-  const handleSubmit = async (values, formikHelpers) => {
+  const handleSubmit = async (values, { setSubmitting }) => {
     try {
       await axios.post(`${API_URL}/api/trips`, values);
       
-      console.log(`Request Body`, values);
-      console.log(formikHelpers);
+      //console.log(`Request Body`, values);
       
+      setSubmitting(false);
       navigate("/profile");
+      
     } catch (error) {
       console.log('Error while submitting create a trip form');
     }
@@ -67,7 +73,7 @@ function CreateTripPage() {
     <div>
       <h2>Create a Trip Page</h2>
       {user && (
-        <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
         {({ values, errors, isSubmitting, isValidating, setFieldValue }) => (
           <Form>
             <FormGroup row={false}>

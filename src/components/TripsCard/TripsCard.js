@@ -25,7 +25,7 @@ function TripsCard({ tripName, _id, coverImg }) {
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 300 }}>
       <CardMedia
         component="img"
         height="160"
