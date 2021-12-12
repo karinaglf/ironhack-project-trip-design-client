@@ -24,7 +24,7 @@ function LoginPage(props) {
       e.preventDefault();
       const requestBody = { email, password };
 
-      // or with a service
+      // with a service
       const response = await authService.login(requestBody);
 
       // Save the token and set the user as logged in ...
