@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { AuthContext } from '../../context/auth.context';
 import {
@@ -8,8 +8,9 @@ import {
   Input,
   Typography,
   CircularProgress,
+  Grid,
 } from '@material-ui/core';
-import { Form, Formik, Field } from 'formik';
+import { Form, Formik, Field, FieldArray } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import authService from '../../services/auth.service';
@@ -34,6 +35,7 @@ function CreateTripPage() {
     duration: 0,
     pax: 1,
     coverMsg: '',
+    days: [{ experiences: [], restaurants: [] }],
   };
 
   //Form Validation Schema
@@ -98,43 +100,71 @@ function CreateTripPage() {
             isValidating,
             setFieldValue,
           }) => (
-            <Form>
-              <FormGroup row={false}>
-                <Field
-                  name="tripName"
-                  as={TextField}
-                  label="Trip Name"
-                  error={touched.tripName && errors.tripName}
-                  helperText={touched.tripName && errors.tripName}
-                />
-                <Input
-                  type="file"
-                  as={TextField}
-                  name="coverImg"
-                  onChange={(e) => handleFileUpload(e, setFieldValue)}
-                />
-                <Field name="coverMsg" as={TextField} label="Cover Message" />
-              </FormGroup>
-              <FormGroup row={true}>
-                <Field name="startDate" as={TextField} label="Start Date" />
-                <Field name="endDate" as={TextField} label="End Date" />
-                <Field name="duration" as={TextField} label="Duration" />
-                <Field name="pax" as={TextField} label="# Travelers" />
-              </FormGroup>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                disabled={isSubmitting || isValidating}
-                startIcon={
-                  isSubmitting ? <CircularProgress size="1rem" /> : undefined
-                }
-              >
-                {isSubmitting ? 'Creating Trip' : 'Create Trip'}
-              </Button>
-              <pre>{JSON.stringify(errors, null, 6)}</pre>
-              <pre>{JSON.stringify(values, null, 6)}</pre>
-            </Form>
+            <Grid container alignItems="center" justifyContent="center">
+              <Form>
+                <FormGroup row={false}>
+                  <Field
+                    name="tripName"
+                    as={TextField}
+                    label="Trip Name"
+                    error={touched.tripName && errors.tripName}
+                    helperText={touched.tripName && errors.tripName}
+                  />
+                  <Input
+                    type="file"
+                    as={TextField}
+                    name="coverImg"
+                    onChange={(e) => handleFileUpload(e, setFieldValue)}
+                  />
+                  <Field name="coverMsg" as={TextField} label="Cover Message" />
+                </FormGroup>
+                <FormGroup row={true}>
+                  <Field name="startDate" as={TextField} label="Start Date" />
+                  <Field name="endDate" as={TextField} label="End Date" />
+                  <Field name="duration" as={TextField} label="Duration" />
+                  <Field name="pax" as={TextField} label="# Travelers" />
+                </FormGroup>
+                <FormGroup>
+                  <FieldArray name="days">
+                  {({push, remove}) => (
+                    <React.Fragment>
+                      <Grid item>
+                        <Typography>Days</Typography>
+                      </Grid>
+                      {values.days.map((_, i) => (
+                        <Grid container>
+                          <Grid item>
+                            <Field name={`days[${i}].experiences`} as={TextField} label="Experiences"/>
+                            <Field name={`days[${i}].restaurants`} as={TextField} label="Restaurants"/>
+                          </Grid>
+                          <Grid item>
+                            <Button onClick={() => remove(i)}>Delete</Button>
+                          </Grid>
+                        </Grid>
+                      ))}
+                          <Grid item>
+                            <Button onClick={() => push({ experiences: [], restaurants: [] })}>Add Day</Button>
+                          </Grid>
+                    </React.Fragment>
+                  )}
+                  </FieldArray>
+
+                </FormGroup>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={isSubmitting || isValidating}
+                  startIcon={
+                    isSubmitting ? <CircularProgress size="1rem" /> : undefined
+                  }
+                >
+                  {isSubmitting ? 'Creating Trip' : 'Create Trip'}
+                </Button>
+                <pre>{JSON.stringify(errors, null, 6)}</pre>
+                <pre>{JSON.stringify(values, null, 6)}</pre>
+              </Form>
+            </Grid>
           )}
         </Formik>
       )}
