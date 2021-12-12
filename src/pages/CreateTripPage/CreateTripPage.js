@@ -1,16 +1,16 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { AuthContext } from '../../context/auth.context';
 import TextField from '../../components/FormsUI/TextFieldWrapper/TextFieldWrapper';
-import SubmitButton from '../../components/FormsUI/ButtonWrapper/ButtonWrapper';
+import SubmitButton from '../../components/FormsUI/SubmitButtonWrapper/SubmitButtonWrapper';
 import Checkbox from '../../components/FormsUI/CheckboxWrapper/CheckboxWrapper';
 import DatePicker from '../../components/FormsUI/DatePickerWrapper/DatePickerWrapper';
 import Select from '../../components/FormsUI/SelectWrapper/SelectWrapper';
+import InputFile from '../../components/FormsUI/InputWrapper/InputWrapper'
 
 import {
-  Button,
-  FormGroup,
   Input,
+  Button,
   Typography,
   CircularProgress,
   Grid,
@@ -28,6 +28,8 @@ import { makeStyles } from '@material-ui/core/styles';
 const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
 function CreateTripPage() {
+  const [isUploaded, setIsUploaded] = useState(false);
+  const [previewCover, setPreviewCover] = useState("https://images.unsplash.com/photo-1469854523086-cc02fe5d8800");
   const { user } = useContext(AuthContext);
 
   const countries = {
@@ -69,7 +71,8 @@ function CreateTripPage() {
     pax: 1,
     coverMsg: '',
     destination: '',
-    days: [{ experiences: [], restaurants: [] }],
+    accommodation: [],
+    days: [],
   };
 
   //Form Validation Schema
@@ -112,6 +115,8 @@ function CreateTripPage() {
       const response = await fileService.uploadImage(uploadData);
 
       setFieldValue('coverImg', response.data.secure_url);
+      setPreviewCover(response.data.secure_url);
+      setIsUploaded('true');
     } catch (error) {
       console.log(error);
     }
@@ -121,7 +126,7 @@ function CreateTripPage() {
     <div>
       <Grid container>
         <Grid item xs={12}>
-          <Typography>CREATE A TRIP - MATERIAL UI FORM</Typography>
+          <Typography component="h1">CREATE A TRIP - MATERIAL UI FORM</Typography>
         </Grid>
         <Grid item xs={12}>
           <Container maxWidth="md">
@@ -140,27 +145,51 @@ function CreateTripPage() {
                   setFieldValue,
                 }) => (
                   <Form>
-                    <Grid container spacing={2}>
+                    <Grid container spacing={12}>
+
+                      <Grid item xs={8}>
+                        <Grid container xs={12} spacing={3}>
+                          <Grid item xs={12}>
+                            <TextField name="tripName" label="Trip Name" />
+                          </Grid>
+                          <Grid item xs={12}>
+                            <TextField name="requestedBy" label="Requested By" />
+                          </Grid>
+                          <Grid item xs={12}>
+                            <TextField name="pax" label="# travelers" type="number" />
+                          </Grid>
+                        </Grid>  
+                      </Grid>
+
+                      <Grid item xs={4}>
+                        <Box>
+                          <img className="" src={previewCover} alt="" height="180px"/>
+                        </Box>
+                        <Input
+                          type="file"
+                          name="coverImg"
+                          onChange={(e) => handleFileUpload(e, setFieldValue)}
+                          style={{ display: 'none' }}
+                          id="button-file"
+                        />
+                        <label htmlFor="button-file">
+                          <Button variant="outlined" component="span" className={""}>
+                            {isUploaded ? 'Edit cover image ' : 'Add custom cover image'}
+                          </Button>
+                        </label> 
+
+                      </Grid>
+                      <hr />
+                      <Grid container spacing={3}>
 
                       <Grid item xs={12}>
-                        <TextField name="tripName" label="Trip Name" />
-                      </Grid>
-
-                      <Grid item xs={6}>
-                        <TextField name="requestedBy" label="Requested By" />
-                      </Grid>
-
-                      <Grid item xs={6}>
-                        <TextField name="pax" label="# travelers" type="number" />
+                        <Typography component="h2">Trip Details</Typography>
                       </Grid>
 
                       <Grid item xs={12}>
                         <TextField name="coverMsg" label="Cover Message" multiline={true} rows={4} />
                       </Grid>
 
-                      <Grid item xs={12}>
-                        <Typography>Trip Details</Typography>
-                      </Grid>
 
                       <Grid item xs={6}>
                         <Select name="destination" label="Country" options={countries}/>
@@ -181,61 +210,73 @@ function CreateTripPage() {
                       <Grid item xs={4}>
                         <TextField name="duration" label="Duration" />
                       </Grid>
+                      </Grid>
+
+                      <hr />
+                      <Grid container spacing={3}>
 
                       <Grid item xs={12}>
-                        <Typography>Accommodation</Typography>
+                        <Typography component="h2">Accommodation</Typography>
                       </Grid>
 
                       <Grid item xs={12}>
-                        <Typography>Days</Typography>
+                        <Select name="accommodation" label="Hotels" options={countries}/>
+                      </Grid>     
+                      </Grid>
+
+                      <hr />
+                      <Grid container spacing={3}>
+                      
+                      <Grid item xs={12}>
+                        <Typography component="h2">Days</Typography>
                       </Grid>
 
                       <Grid item xs={12}>
                       <FieldArray name="days">
-                  {({ push, remove }) => (
-                    <React.Fragment>
-                      {values.days.map((_, i) => (
-                        <Box key={i} sx={{backgroundColor: '#f4f4f4', borderRadius: '20px', padding: '20px 20px 30px', margin: "20px 0"}}>
-                          <Grid container spacing={1} justifyContent="center" alignItems="center">
-                          <Grid item xs={12} spacing={3}>
-                          <Typography>Day #{i+1}</Typography>
-                          </Grid>
-                          <Grid container xs={11} spacing={3}>
-                          <Grid item xs={12}>
-                            <TextField name={`days[${i}].experiences`} label="Experiences"/>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <TextField name={`days[${i}].restaurants`} label="Restaurants"/>
-                          </Grid>
-                          </Grid>
-                          <Grid item xs={1}>
-                            <Button onClick={() => remove(i)}>Delete</Button>
-                          </Grid>
-                        </Grid>
-                        </Box>
-                      ))}
+                        {({ push, remove }) => (
+                          <React.Fragment>
+                            {values.days.map((_, i) => (
+                              <Box key={i} sx={{border: '1px solid #C4C4C4', borderRadius: '8px', padding: '20px 20px 30px', margin: "20px 0"}}>
+                                <Grid container spacing={1} justifyContent="center" alignItems="center">
+                                <Grid item xs={12} spacing={3}>
+                                <Typography component="h3">Day #{i+1}</Typography>
+                                </Grid>
+                                <Grid container xs={11} spacing={3}>
+                                <Grid item xs={12}>
+                                  <TextField name={`days[${i}].experiences`} label="Experiences"/>
+                                </Grid>
+                                <Grid item xs={12}>
+                                  <TextField name={`days[${i}].restaurants`} label="Restaurants"/>
+                                </Grid>
+                                </Grid>
+                                <Grid item xs={1}>
+                                  <Button onClick={() => remove(i)}>Delete</Button>
+                                </Grid>
+                              </Grid>
+                              </Box>
+                            ))}
+                            <Grid item xs={12}>
+                              <Button
+                                variant="outlined"
+                                color="primary"
+                                onClick={() =>
+                                  push({ experiences: [], restaurants: [] })
+                                }
+                              >
+                                Add New Day
+                              </Button>
+                            </Grid>
+                          </React.Fragment>
+                        )}
+                      </FieldArray>
+                      </Grid>
+                      </Grid>
+                      <hr />
                       <Grid item xs={12}>
-                        <Button
-                          variant="outlined"
-                          color="primary"
-                          onClick={() =>
-                            push({ experiences: [], restaurants: [] })
-                          }
-                        >
-                          Add Day
-                        </Button>
-                      </Grid>
-                    </React.Fragment>
-                  )}
-                </FieldArray>
-
-                      </Grid>
-
-                      <Grid item xs={12}>
-                        <Button>Submit Form</Button>
-                      </Grid>
+                        <SubmitButton>Submit Form</SubmitButton>
                         <pre>{JSON.stringify(errors, null, 6)}</pre>
                         <pre>{JSON.stringify(values, null, 6)}</pre>
+                      </Grid>
                     </Grid>
                   </Form>
                 )}
@@ -244,53 +285,6 @@ function CreateTripPage() {
           </Container>
         </Grid>
       </Grid>
-      <hr />
-      <hr />
-      <hr />
-
-      <Typography component="h1">Create Trip</Typography>
-      {user && (
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            isSubmitting,
-            isValidating,
-            setFieldValue,
-          }) => (
-            <Form>
-              <FormGroup row={false}>
-                <TextField name="tripName" label="Trip Name" />
-                <Input
-                  type="file"
-                  name="coverImg"
-                  onChange={(e) => handleFileUpload(e, setFieldValue)}
-                  variant="outlined"
-                />
-                <hr />
-              </FormGroup>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                disabled={isSubmitting || isValidating}
-                startIcon={
-                  isSubmitting ? <CircularProgress size="1rem" /> : undefined
-                }
-              >
-                {isSubmitting ? 'Creating Trip' : 'Create Trip'}
-              </Button>
-              <pre>{JSON.stringify(errors, null, 6)}</pre>
-              <pre>{JSON.stringify(values, null, 6)}</pre>
-            </Form>
-          )}
-        </Formik>
-      )}
     </div>
   );
 }
