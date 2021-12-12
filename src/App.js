@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import Navbar from './components/Navbar/Navbar';
+import Navbar1 from './components/Navbar/Navbar1';
 
 import HomePage from './pages/HomePage/HomePage';
 import SignupPage from './pages/SignupPage/SignupPage';
@@ -24,7 +25,6 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-
       <Routes>
         <Route path="/" element={<HomePage />} />
 
