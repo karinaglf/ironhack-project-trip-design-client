@@ -7,11 +7,10 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
-import { WidgetsSharp } from '@mui/icons-material';
 import { useField, useFormikContext } from 'formik';
 
 
-const ITEM_HEIGHT = 48;
+const ITEM_HEIGHT = 30;
 const ITEM_PADDING_TOP = 5;
 const MenuProps = {
   PaperProps: {
@@ -22,54 +21,62 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
+const cities = [
+  'Porto',
+  'Lisbon',
+  'Algarve',
+  'Évora'
 ];
 
-function getStyles(item, personName, theme) {
+function getStyles(item, selection, theme) {
   return {
     fontWeight:
-      personName.indexOf(item) === -1
+      selection.indexOf(item) === -1
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
   };
 }
 
-const MultiSelectWrapper = () => {
-  // const { setFieldValue } = useFormikContext();
-  // const [field, meta] = useField(cities);
+const MultiSelectWrapper = ({
+  name,
+  options,
+  ...otherProps
+}) => {
+  const { setFieldValue } = useFormikContext();
+  const [field, meta] = useField(name);
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
+  const [selection, setSelection] = React.useState([]);
 
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a the stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    );
+  const handleChange = evt => {
+    const { value } = evt.target;
+    setFieldValue(name, value);
+    setSelection(value);
   };
+
+  const configSelect = {
+    ...field,
+    ...otherProps,
+    select: true,
+    variant: 'outlined',
+    fullWidth: true,
+    onChange: handleChange
+  };
+
+  if (meta && meta.touched && meta.error) {
+    configSelect.error = true;
+    configSelect.helperText = meta.error;
+  }
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 380 }}>
-        <InputLabel id="demo-multiple-chip-label">Chip</InputLabel>
+      <FormControl sx={{ width: 400 }}>
+        <InputLabel id="demo-multiple-chip-label">Cities</InputLabel>
         <Select
           labelId="multiple-chip-label"
           id="multiple-chip"
           multiple
           name="cities"
-          value={personName}
+          value={selection}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label="Cities" />}
           renderValue={(selected) => (
@@ -81,11 +88,11 @@ const MultiSelectWrapper = () => {
           )}
           MenuProps={MenuProps}
         >
-          {names.map((item) => (
+          {cities.map((item) => (
             <MenuItem
               key={item}
               value={item}
-              style={getStyles(item, personName, theme)}
+              style={getStyles(item, selection, theme)}
             >
               {item}
             </MenuItem>
