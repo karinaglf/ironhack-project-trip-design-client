@@ -40,6 +40,7 @@ function getStyles(item, selection, theme) {
 const MultiSelectWrapper = ({
   name,
   options,
+  label,
   ...otherProps
 }) => {
   const { setFieldValue } = useFormikContext();
@@ -69,16 +70,17 @@ const MultiSelectWrapper = ({
 
   return (
     <div>
-      <FormControl sx={{ width: 400 }}>
-        <InputLabel id="demo-multiple-chip-label">Cities</InputLabel>
+      <FormControl fullWidth>
+        <InputLabel>{label}</InputLabel>
         <Select
           labelId="multiple-chip-label"
           id="multiple-chip"
+          fullWidth
           multiple
           name="cities"
           value={selection}
           onChange={handleChange}
-          input={<OutlinedInput id="select-multiple-chip" label="Cities" />}
+          input={<OutlinedInput id="select-multiple-chip" label={label} />}
           renderValue={(selected) => (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
               {selected.map((value) => (

@@ -240,7 +240,7 @@ function CreateTripPage() {
                         <Grid item xs={6}>
                           <MultiSelect
                             name="cities"
-                            label="City"
+                            label="Cities"
                           />
                         </Grid>
 
