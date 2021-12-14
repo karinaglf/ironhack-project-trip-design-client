@@ -13,7 +13,7 @@ function TripDetailsPage() {
 
   const getTrip = async () => {
     try {
-      const response = await axios.get(`http://localhost:5005/api/trips/${tripId}`);
+      const response = await axios.get(`${API_URL}/api/trips/${tripId}`);
       const oneTrip = response.data;
       setTrip(oneTrip);
     } catch (error) {

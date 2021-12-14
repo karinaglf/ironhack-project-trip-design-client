@@ -8,6 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import { useField, useFormikContext } from 'formik';
+import { SliderValueLabel } from '@mui/material';
 
 const ITEM_HEIGHT = 30;
 const ITEM_PADDING_TOP = 5;
@@ -20,14 +21,14 @@ const MenuProps = {
   },
 };
 
-const cities = [
+const arrayExample = [
   'Porto',
   'Lisbon',
   'Algarve',
   'Évora'
 ];
 
-const countries = {
+const objExample = {
   AF: 'Afghanistan',
   AL: 'Albania',
   DZ: 'Algeria',
@@ -107,16 +108,7 @@ const MultiSelectWrapper = ({
           )}
           MenuProps={MenuProps}
         >
-          {/* {options.map((item) => (
-            <MenuItem
-              key={item}
-              value={item}
-              style={getStyles(item, selection, theme)}
-            >
-              {item}
-            </MenuItem>
-          ))} */}
-          {Object.keys(countries).map((item, pos) => {
+          {Object.keys(options).map((item, pos) => {
         return (
           <MenuItem key={pos} value={item}>
             {options[item]}

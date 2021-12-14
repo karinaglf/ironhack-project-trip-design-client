@@ -1,13 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { AuthContext } from '../../../context/auth.context';
-import TextField from '../../../components/FormsUI/TextFieldWrapper/TextFieldWrapper';
-import SubmitButton from '../../../components/FormsUI/SubmitButtonWrapper/SubmitButtonWrapper';
-import Checkbox from '../../../components/FormsUI/CheckboxWrapper/CheckboxWrapper';
-import DatePicker from '../../../components/FormsUI/DatePickerWrapper/DatePickerWrapper';
-import Select from '../../../components/FormsUI/SelectWrapper/SelectWrapper';
-import MultiSelect from '../../../components/FormsUI/MultiSelectWrapper/MultiSelectWrapper';
-import InputFile from '../../../components/FormsUI/InputWrapper/InputWrapper';
+import TextField from '../../../components/FormsUI/TextFieldWrapper';
+import SubmitButton from '../../../components/FormsUI/SubmitButtonWrapper';
+import Checkbox from '../../../components/FormsUI/CheckboxWrapper';
+import DatePicker from '../../../components/FormsUI/DatePickerWrapper';
+import Select from '../../../components/FormsUI/SelectWrapper';
+import MultiSelect from '../../../components/FormsUI/MultiSelectWrapper';
+import InputFile from '../../../components/FormsUI/InputWrapper';
 import CitiesSelect from '../../../components/FormsUI/Async/CitiesSelect';
 
 import {
@@ -32,6 +32,7 @@ const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 function CreateTripPage() {
   const [isUploaded, setIsUploaded] = useState(false);
   const [cities, setCities] = useState();
+  const [accommodations, setAccommodations] = useState();
   const [previewCover, setPreviewCover] = useState(
     'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800'
   );
@@ -53,9 +54,28 @@ function CreateTripPage() {
       console.log(error);
     }
   };
+
+  const getAllAccommodations = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/api/accommodations`);
+      
+      let accommodationsObj = {}
+      response.data.forEach((item) => {
+        accommodationsObj[item._id] = item.name
+      })
+      console.log(accommodationsObj)
+
+      setAccommodations(accommodationsObj);
+    } catch(error) {
+      console.log(error);
+    }
+  };
+
+  
   
   useEffect(() => {
     getAllCities();
+    getAllAccommodations();
   }, [] );
   
   console.log(cities)
@@ -79,27 +99,8 @@ function CreateTripPage() {
     BS: 'Bahamas',
   };
 
-  const names = [
-    'Oliver Hansen',
-    'Van Henry',
-    'April Tucker',
-    'Ralph Hubbard',
-    'Omar Alexander',
-    'Carlos Abbott',
-    'Miriam Wagner',
-    'Bradley Wilkerson',
-    'Virginia Andrews',
-    'Kelly Snyder',
-  ];
-
   const navigate = useNavigate();
 
-  const useStyles = makeStyles((theme) => ({
-    formWrapper: {
-      marginTop: theme.spacing(5),
-      marginBottom: theme.spacing(8),
-    },
-  }));
 
   //Form Initial Values
   const initialValues = {
@@ -129,26 +130,26 @@ function CreateTripPage() {
   });
 
   //Handle Submit - RETURN THIS AFTER
-  // const handleSubmit = async (values, { setSubmitting }) => {
-  //   try {
-  //     await axios.post(`${API_URL}/api/trips`, values);
+  const handleSubmit = async (values, { setSubmitting }) => {
+    try {
+      await axios.post(`${API_URL}/api/trips`, values);
 
-  //     //console.log(`Request Body`, values);
+      //console.log(`Request Body`, values);
 
-  //     setSubmitting(false);
-  //     navigate("/profile");
-
-  //   } catch (error) {
-  //     console.log('Error while submitting create a trip form');
-  //   }
-  // };
-
-  const handleSubmit = (values, { setSubmitting }) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
       setSubmitting(false);
-    }, 1000);
+      navigate("/profile");
+
+    } catch (error) {
+      console.log('Error while submitting create a trip form');
+    }
   };
+
+  // const handleSubmit = (values, { setSubmitting }) => {
+  //   setTimeout(() => {
+  //     alert(JSON.stringify(values, null, 2));
+  //     setSubmitting(false);
+  //   }, 1000);
+  // };
 
   // Handle File Upload
   const handleFileUpload = async (e, setFieldValue) => {
@@ -169,7 +170,7 @@ function CreateTripPage() {
 
   return (
     <div>
-    {cities && <Grid container>
+    {cities && accommodations && <Grid container>
         <Grid item xs={12}>
           <Typography component="h1">
             CREATE A TRIP
@@ -270,7 +271,7 @@ function CreateTripPage() {
                           <MultiSelect
                             name="destination.accommodations"
                             label="Cities"
-                            options={countries}
+                            options={cities}
                           />
                         </Grid>
 
@@ -287,9 +288,6 @@ function CreateTripPage() {
                         </Grid>
                       </Grid>
 
-                      <hr />
-                      {/* <CitiesSelect /> */}
-                      <hr />
 
                       <Grid container spacing={3}>
                         <Grid item xs={12}>
@@ -330,9 +328,10 @@ function CreateTripPage() {
                                           />
                                         </Grid>                                      
                                         <Grid item xs={12}>
-                                          <TextField
+                                          <MultiSelect
                                             name={`destination[${i}].accommodations`}
                                             label="Accommodations"
+                                            options={accommodations}
                                           />
                                         </Grid>
                                       </Grid>

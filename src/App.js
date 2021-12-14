@@ -19,9 +19,6 @@ import IsPrivate from './components/IsPrivate/IsPrivate';
 import IsAnon from './components/IsAnon/IsAnon';
 
 function App() {
-  useEffect(() => {
-    document.title = 'Trip Design';
-  }, []);
 
   return (
     <div className="App">

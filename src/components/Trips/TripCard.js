@@ -14,11 +14,12 @@ import {
 
 const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
-function TripsCard({ tripName, _id, coverImg }) {
+function TripsCard({ tripName, _id, coverImg, setIsUpdated, isUpdated }) {
 
   const deleteTrip = async () => {
     try {
       await axios.delete(`${API_URL}/api/trips/${_id}`);
+      setIsUpdated(!isUpdated);
     } catch (error) {
       console.log('Error while deleting trip');
     }
