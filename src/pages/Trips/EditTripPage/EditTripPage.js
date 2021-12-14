@@ -27,6 +27,8 @@ function EditTripPage() {
 
     return ( 
         <div className="">
+        <h1>Edit Trip Form</h1>
+
         {trip && (
           <>
             <h1>EDIT TRIP: {trip.tripName}</h1>

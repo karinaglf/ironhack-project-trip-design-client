@@ -1,13 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import { AuthContext } from '../../context/auth.context';
-import TextField from '../../components/FormsUI/TextFieldWrapper/TextFieldWrapper';
-import SubmitButton from '../../components/FormsUI/SubmitButtonWrapper/SubmitButtonWrapper';
-import Checkbox from '../../components/FormsUI/CheckboxWrapper/CheckboxWrapper';
-import DatePicker from '../../components/FormsUI/DatePickerWrapper/DatePickerWrapper';
-import Select from '../../components/FormsUI/SelectWrapper/SelectWrapper';
-import MultiSelect from '../../components/FormsUI/MultiSelectWrapper/MultiSelectWrapper';
-import InputFile from '../../components/FormsUI/InputWrapper/InputWrapper';
+import { AuthContext } from '../../../context/auth.context';
+import TextField from '../../../components/FormsUI/TextFieldWrapper/TextFieldWrapper';
+import SubmitButton from '../../../components/FormsUI/SubmitButtonWrapper/SubmitButtonWrapper';
+import Checkbox from '../../../components/FormsUI/CheckboxWrapper/CheckboxWrapper';
+import DatePicker from '../../../components/FormsUI/DatePickerWrapper/DatePickerWrapper';
+import Select from '../../../components/FormsUI/SelectWrapper/SelectWrapper';
+import MultiSelect from '../../../components/FormsUI/MultiSelectWrapper/MultiSelectWrapper';
+import InputFile from '../../../components/FormsUI/InputWrapper/InputWrapper';
 
 import {
   Input,
@@ -21,8 +21,8 @@ import {
 import { Form, Formik, Field, FieldArray } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import authService from '../../services/auth.service';
-import fileService from '../../services/file.service';
+import authService from '../../../services/auth.service';
+import fileService from '../../../services/file.service';
 import { string } from 'yup/lib/locale';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -87,8 +87,10 @@ function CreateTripPage() {
     pax: 1,
     coverMsg: '',
     country: '',
-    cities: '',
-    accommodation: [],
+    destination: {
+        city: '',
+        accommodation: [],
+      },
     days: [],
   };
 
@@ -144,9 +146,10 @@ function CreateTripPage() {
       <Grid container>
         <Grid item xs={12}>
           <Typography component="h1">
-            CREATE A TRIP - MATERIAL UI FORM
+            CREATE A TRIP
           </Typography>
         </Grid>
+        <hr />
         <Grid item xs={12}>
           <Container maxWidth="md">
             <div className={''}>
@@ -239,7 +242,7 @@ function CreateTripPage() {
 
                         <Grid item xs={6}>
                           <MultiSelect
-                            name="cities"
+                            name="destination.city"
                             label="Cities"
                           />
                         </Grid>

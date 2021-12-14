@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
-import TripsCard from '../../components/TripsCard/TripsCard';
+import TripsCard from '../../components/Trips/TripCard';
 
 // Material UI 
 import Button from '@material-ui/core/Button';
@@ -13,13 +13,20 @@ function ProfilePage() {
   const { user } = useContext(AuthContext);
   console.log(user);
 
+  
+
   return (
     <div>
       <h1>Profile Page</h1>
       <h2>Hello </h2>
 
-      <Link to={`/create-trip`}>
+      <Link to={`/add-trip`}>
         <Button>Create Trip</Button>
+      </Link>
+
+
+      <Link to={`/`}>
+        <Button>See All Experiences</Button>
       </Link>
 
       <div>

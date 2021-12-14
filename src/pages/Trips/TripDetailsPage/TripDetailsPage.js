@@ -27,6 +27,7 @@ function TripDetailsPage() {
 
     return ( 
         <div className="">
+          <h1>Details:</h1>
         {trip && (
           <>
             <h1>Details: {trip.tripName}</h1>
