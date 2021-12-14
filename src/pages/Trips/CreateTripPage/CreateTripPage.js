@@ -8,6 +8,7 @@ import DatePicker from '../../../components/FormsUI/DatePickerWrapper/DatePicker
 import Select from '../../../components/FormsUI/SelectWrapper/SelectWrapper';
 import MultiSelect from '../../../components/FormsUI/MultiSelectWrapper/MultiSelectWrapper';
 import InputFile from '../../../components/FormsUI/InputWrapper/InputWrapper';
+import CitiesSelect from '../../../components/FormsUI/Async/CitiesSelect';
 
 import {
   Input,
@@ -30,10 +31,35 @@ const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
 function CreateTripPage() {
   const [isUploaded, setIsUploaded] = useState(false);
+  const [cities, setCities] = useState();
   const [previewCover, setPreviewCover] = useState(
     'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800'
   );
   const { user } = useContext(AuthContext);
+
+  
+  const getAllCities = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/api/cities`);
+      
+      let citiesObj = {}
+      response.data.forEach((item) => {
+        citiesObj[item._id] = item.name
+      })
+      console.log(citiesObj)
+
+      setCities(citiesObj);
+    } catch(error) {
+      console.log(error);
+    }
+  };
+  
+  useEffect(() => {
+    getAllCities();
+  }, [] );
+  
+  console.log(cities)
+
 
   const countries = {
     AF: 'Afghanistan',
@@ -77,22 +103,22 @@ function CreateTripPage() {
 
   //Form Initial Values
   const initialValues = {
-    tripName: '',
-    coverImg: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800',
-    // createdBy: user._id,
-    requestedBy: '',
-    startDate: '',
-    endDate: '',
-    duration: 0,
-    pax: 1,
-    coverMsg: '',
-    country: '',
-    destination: {
-        city: '',
-        accommodation: [],
-      },
-    days: [],
-  };
+    tripName: "",
+    coverImg: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800",
+    startDate: "",
+    endDate: "",
+    duration: 3,
+    pax: 2,
+    coverMsg: "",
+    createdBy: "61b12b0836e4858130bd3424",
+    destination: [{
+      city: "",
+      accommodations: []
+    }],
+    days: [{
+      experiences: []
+    }]
+};
 
   //Form Validation Schema
   const validationSchema = Yup.object({
@@ -143,7 +169,7 @@ function CreateTripPage() {
 
   return (
     <div>
-      <Grid container>
+    {cities && <Grid container>
         <Grid item xs={12}>
           <Typography component="h1">
             CREATE A TRIP
@@ -236,14 +262,15 @@ function CreateTripPage() {
                           <Select
                             name="country"
                             label="Country"
-                            options={countries}
+                            options={cities}
                           />
                         </Grid>
 
                         <Grid item xs={6}>
                           <MultiSelect
-                            name="destination.city"
+                            name="destination.accommodations"
                             label="Cities"
+                            options={countries}
                           />
                         </Grid>
 
@@ -261,19 +288,80 @@ function CreateTripPage() {
                       </Grid>
 
                       <hr />
+                      {/* <CitiesSelect /> */}
+                      <hr />
+
                       <Grid container spacing={3}>
                         <Grid item xs={12}>
-                          <Typography component="h2">Accommodation</Typography>
+                          <Typography component="h2">Destination</Typography>
                         </Grid>
 
                         <Grid item xs={12}>
-                          <Select
-                            name="accommodation"
-                            label="Hotels"
-                            options={countries}
-                          />
+                          <FieldArray name="destination">
+                            {({ push, remove }) => (
+                              <React.Fragment>
+                                {values.destination.map((_, i) => (
+                                  <Box
+                                    key={i}
+                                    sx={{
+                                      border: '1px solid #C4C4C4',
+                                      borderRadius: '8px',
+                                      padding: '20px 20px 30px',
+                                      margin: '20px 0',
+                                    }}
+                                  >
+                                    <Grid
+                                      container
+                                      spacing={1}
+                                      justifyContent="center"
+                                      alignItems="center"
+                                    >
+                                      <Grid item xs={12}>
+                                        <Typography component="h3">
+                                          City #{i + 1}
+                                        </Typography>
+                                      </Grid>
+                                      <Grid item xs={11} >
+                                        <Grid item xs={12}>
+                                          <Select
+                                            name={`destination[${i}].city`}
+                                            label="City"
+                                            options={cities}
+                                          />
+                                        </Grid>                                      
+                                        <Grid item xs={12}>
+                                          <TextField
+                                            name={`destination[${i}].accommodations`}
+                                            label="Accommodations"
+                                          />
+                                        </Grid>
+                                      </Grid>
+
+                                      <Grid item xs={1}>
+                                        <Button onClick={() => remove(i)}>
+                                          Delete
+                                        </Button>
+                                      </Grid>
+                                    </Grid>
+                                  </Box>
+                                ))}
+                                <Grid item xs={12}>
+                                  <Button
+                                    variant="outlined"
+                                    color="primary"
+                                    onClick={() =>
+                                      push({ city: [], accommodations: [] })
+                                    }
+                                  >
+                                    Add New Destination
+                                  </Button>
+                                </Grid>
+                              </React.Fragment>
+                            )}
+                          </FieldArray>
                         </Grid>
                       </Grid>
+                      <hr />
 
                       <hr />
                       <Grid container spacing={3}>
@@ -311,12 +399,6 @@ function CreateTripPage() {
                                           <TextField
                                             name={`days[${i}].experiences`}
                                             label="Experiences"
-                                          />
-                                        </Grid>
-                                        <Grid item xs={12}>
-                                          <TextField
-                                            name={`days[${i}].restaurants`}
-                                            label="Restaurants"
                                           />
                                         </Grid>
                                       </Grid>
@@ -358,6 +440,7 @@ function CreateTripPage() {
           </Container>
         </Grid>
       </Grid>
+    }
     </div>
   );
 }

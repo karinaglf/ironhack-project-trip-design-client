@@ -13,12 +13,10 @@ function ProfilePage() {
   const { user } = useContext(AuthContext);
   console.log(user);
 
-  
-
   return (
     <div>
       <h1>Profile Page</h1>
-      <h2>Hello </h2>
+      <h2>Hello {user.name}</h2>
 
       <Link to={`/add-trip`}>
         <Button>Create Trip</Button>
@@ -33,8 +31,6 @@ function ProfilePage() {
         {user && (
           <>
             <img className="profile-img" src={user.image} alt="profile" />
-            <p>{user.email}</p>
-            <p>{user.name}</p>
             <Grid container spacing={6}>
             {user.createdTrips.map((oneTrip) => (
               <Grid key={oneTrip._id} item xs={6} md={3}>

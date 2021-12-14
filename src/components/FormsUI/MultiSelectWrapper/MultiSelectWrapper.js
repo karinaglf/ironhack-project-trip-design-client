@@ -9,7 +9,6 @@ import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import { useField, useFormikContext } from 'formik';
 
-
 const ITEM_HEIGHT = 30;
 const ITEM_PADDING_TOP = 5;
 const MenuProps = {
@@ -27,6 +26,24 @@ const cities = [
   'Algarve',
   'Évora'
 ];
+
+const countries = {
+  AF: 'Afghanistan',
+  AL: 'Albania',
+  DZ: 'Algeria',
+  AS: 'American Samoa',
+  AD: 'Andorra',
+  AO: 'Angola',
+  AI: 'Anguilla',
+  AG: 'Antigua and Barbuda',
+  AR: 'Argentina',
+  AM: 'Armenia',
+  AW: 'Aruba',
+  AU: 'Australia',
+  AT: 'Austria',
+  AZ: 'Azerbaijan',
+  BS: 'Bahamas',
+};
 
 function getStyles(item, selection, theme) {
   return {
@@ -77,7 +94,7 @@ const MultiSelectWrapper = ({
           id="multiple-chip"
           fullWidth
           multiple
-          name="cities"
+          name={field}
           value={selection}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label={label} />}
@@ -90,7 +107,7 @@ const MultiSelectWrapper = ({
           )}
           MenuProps={MenuProps}
         >
-          {cities.map((item) => (
+          {/* {options.map((item) => (
             <MenuItem
               key={item}
               value={item}
@@ -98,7 +115,14 @@ const MultiSelectWrapper = ({
             >
               {item}
             </MenuItem>
-          ))}
+          ))} */}
+          {Object.keys(countries).map((item, pos) => {
+        return (
+          <MenuItem key={pos} value={item}>
+            {options[item]}
+          </MenuItem>
+          )
+          })}
         </Select>
       </FormControl>
     </div>
