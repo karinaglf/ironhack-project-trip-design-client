@@ -6,6 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 import authService from "../../services/auth.service";
 
+const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
+
 function LoginPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,8 +26,14 @@ function LoginPage(props) {
       e.preventDefault();
       const requestBody = { email, password };
 
-      // with a service
-      const response = await authService.login(requestBody);
+      const authToken = localStorage.getItem("authToken");
+      const response = await axios.post( `${API_URL}/auth/login`,
+        requestBody,
+        { headers: { Authorization: `Bearer ${authToken}` } }
+      );
+
+      // or with a service
+      // const response = await authService.login(requestBody);
 
       // Save the token and set the user as logged in ...
       const token = response.data.authToken;
@@ -33,8 +41,9 @@ function LoginPage(props) {
 
       navigate("/");
     } catch (error) {
+      console.log(error);
       // If the request resolves with an error, set the error message in the state
-      setErrorMessage("Something went wrong");
+      setErrorMessage(error.response.data.message);
     }
   };
 
