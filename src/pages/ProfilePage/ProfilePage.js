@@ -1,23 +1,17 @@
 import { useState, useEffect, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
 import TripsCard from '../../components/Trips/TripCard';
 import userService from '../../services/user.service';
-import axios from 'axios';
 
 // Material UI
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-
-const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
+import { Grid, Button } from '@material-ui/core';
 
 function ProfilePage() {
-  const { user, logOutUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [currentUser, setCurrentUser] = useState(null);
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [isUpdated, setIsUpdated] = useState(false);
-
-  const userId = user._id;
 
   const getUserInfo = async () => {
     try {
@@ -38,7 +32,7 @@ function ProfilePage() {
 
   console.log(currentUser)
   return (
-    <div>
+    <>
 
     {errorMessage && <p>{errorMessage}</p>}
 
@@ -67,7 +61,7 @@ function ProfilePage() {
           </div>
           </>
           )}
-    </div>
+    </>
   );
 }
 

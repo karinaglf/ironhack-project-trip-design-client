@@ -11,18 +11,15 @@ import {
   Input,
   Button,
   Typography,
-  CircularProgress,
   Grid,
   Container,
   Box,
 } from '@material-ui/core';
-import { Form, Formik, Field, FieldArray } from 'formik';
+import { Form, Formik, FieldArray } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import authService from '../../../services/auth.service';
 import fileService from '../../../services/file.service';
 import { string } from 'yup/lib/locale';
-import { makeStyles } from '@material-ui/core/styles';
 
 const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
@@ -36,6 +33,7 @@ function CreateTripPage() {
   );
   const { user } = useContext(AuthContext);
 
+  const userId = user._id
   
   const getAllCities = async () => {
     try {
@@ -45,7 +43,6 @@ function CreateTripPage() {
       response.data.forEach((item) => {
         citiesObj[item._id] = item.name
       })
-      console.log(citiesObj)
 
       setCities(citiesObj);
     } catch(error) {
@@ -61,7 +58,6 @@ function CreateTripPage() {
       response.data.forEach((item) => {
         accommodationsObj[item._id] = item.name
       })
-      console.log(accommodationsObj)
 
       setAccommodations(accommodationsObj);
     } catch(error) {
@@ -94,7 +90,6 @@ function CreateTripPage() {
 
   const navigate = useNavigate();
 
-
   //Form Initial Values
   const initialValues = {
     tripName: "",
@@ -104,7 +99,7 @@ function CreateTripPage() {
     duration: 3,
     pax: 2,
     coverMsg: "",
-    createdBy: "61b12b0836e4858130bd3424",
+    createdBy: userId,
     destination: [{
       city: "",
       accommodations: []
@@ -116,7 +111,7 @@ function CreateTripPage() {
 
   //Form Validation Schema
   const validationSchema = Yup.object({
-    tripName: Yup.string('Enter your email')
+    tripName: Yup.string()
       .required('Trip Name is Required')
       .min(2, 'at least 2')
       .max(30, 'max 30 chars'),
@@ -253,22 +248,6 @@ function CreateTripPage() {
                           />
                         </Grid>
 
-                        <Grid item xs={6}>
-                          <Select
-                            name="country"
-                            label="Country"
-                            options={cities}
-                          />
-                        </Grid>
-
-                        <Grid item xs={6}>
-                          <MultiSelect
-                            name="destination.accommodations"
-                            label="Cities"
-                            options={cities}
-                          />
-                        </Grid>
-
                         <Grid item xs={4}>
                           <DatePicker name="startDate" label="Start Date" />
                         </Grid>
@@ -285,13 +264,13 @@ function CreateTripPage() {
 
                       <Grid container spacing={3}>
                         <Grid item xs={12}>
-                          <Typography component="h2">Destination</Typography>
+                          <Typography component="h2" align="center">Destination</Typography>
                         </Grid>
 
                         <Grid item xs={12}>
                           <FieldArray name="destination">
                             {({ push, remove }) => (
-                              <React.Fragment>
+                              <>
                                 {values.destination.map((_, i) => (
                                   <Box
                                     key={i}
@@ -309,7 +288,7 @@ function CreateTripPage() {
                                       alignItems="center"
                                     >
                                       <Grid item xs={12}>
-                                        <Typography component="h3">
+                                        <Typography component="h3" sx={{mb: 2, mr: 2,}}>
                                           City #{i + 1}
                                         </Typography>
                                       </Grid>
@@ -349,7 +328,7 @@ function CreateTripPage() {
                                     Add New Destination
                                   </Button>
                                 </Grid>
-                              </React.Fragment>
+                              </>
                             )}
                           </FieldArray>
                         </Grid>
@@ -365,7 +344,7 @@ function CreateTripPage() {
                         <Grid item xs={12}>
                           <FieldArray name="days">
                             {({ push, remove }) => (
-                              <React.Fragment>
+                              <>
                                 {values.days.map((_, i) => (
                                   <Box
                                     key={i}
@@ -415,7 +394,7 @@ function CreateTripPage() {
                                     Add New Day
                                   </Button>
                                 </Grid>
-                              </React.Fragment>
+                              </>
                             )}
                           </FieldArray>
                         </Grid>

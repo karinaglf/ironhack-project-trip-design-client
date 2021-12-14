@@ -1,6 +1,5 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
 
 import Navbar from './components/Navbar/Navbar';
 import Navbar1 from './components/Navbar/Navbar1';
@@ -20,20 +19,20 @@ import IsAnon from './components/IsAnon/IsAnon';
 function App() {
 
   return (
-    <div className="App">
+    <>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/signup" element={<IsAnon> <SignupPage /> </IsAnon>}/>
-        <Route path="/login" element={<IsAnon> <LoginPage /> </IsAnon>}/>
-        <Route path="/profile" element={<IsPrivate> <ProfilePage /> </IsPrivate>}/>
-        <Route path="/add-trip" element={<IsPrivate> <CreateTripPage /> </IsPrivate>}/>
-        <Route path="/trips/edit/:tripId/" element={<IsPrivate> <EditTripPage /> </IsPrivate>} />
-        <Route path="/trips/:tripId" element={<IsPrivate> <TripDetailsPage /> </IsPrivate>} />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/signup" element={<IsAnon> <SignupPage /> </IsAnon>}/>
+            <Route path="/login" element={<IsAnon> <LoginPage /> </IsAnon>}/>
+            <Route path="/profile" element={<IsPrivate> <ProfilePage /> </IsPrivate>}/>
+            <Route path="/add-trip" element={<IsPrivate> <CreateTripPage /> </IsPrivate>}/>
+            <Route path="/trips/edit/:tripId/" element={<IsPrivate> <EditTripPage /> </IsPrivate>} />
+            <Route path="/trips/:tripId" element={<IsPrivate> <TripDetailsPage /> </IsPrivate>} />
 
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
-    </div>
+            <Route path="*" element={<ErrorPage />} />
+          </Routes>
+    </>
   );
 }
 
