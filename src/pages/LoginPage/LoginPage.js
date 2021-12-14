@@ -38,7 +38,8 @@ function LoginPage(props) {
       // Save the token and set the user as logged in ...
       const token = response.data.authToken;
       logInUser(token);
-
+      console.log(`logInUser`, logInUser)
+      console.log(`token`, token)
       navigate("/");
     } catch (error) {
       console.log(error);
