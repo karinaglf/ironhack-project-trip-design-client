@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import authService from "../../services/auth.service";
+// import authService from "../../services/auth.service";
 
 function SignupPage(props) {
   const [email, setEmail] = useState("");
