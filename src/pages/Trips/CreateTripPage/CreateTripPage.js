@@ -3,12 +3,9 @@ import { useNavigate } from 'react-router';
 import { AuthContext } from '../../../context/auth.context';
 import TextField from '../../../components/FormsUI/TextFieldWrapper';
 import SubmitButton from '../../../components/FormsUI/SubmitButtonWrapper';
-import Checkbox from '../../../components/FormsUI/CheckboxWrapper';
 import DatePicker from '../../../components/FormsUI/DatePickerWrapper';
 import Select from '../../../components/FormsUI/SelectWrapper';
 import MultiSelect from '../../../components/FormsUI/MultiSelectWrapper';
-import InputFile from '../../../components/FormsUI/InputWrapper';
-import CitiesSelect from '../../../components/FormsUI/Async/CitiesSelect';
 
 import {
   Input,
@@ -33,6 +30,7 @@ function CreateTripPage() {
   const [isUploaded, setIsUploaded] = useState(false);
   const [cities, setCities] = useState();
   const [accommodations, setAccommodations] = useState();
+  const [experiences, setExperiences] = useState();
   const [previewCover, setPreviewCover] = useState(
     'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800'
   );
@@ -70,34 +68,29 @@ function CreateTripPage() {
       console.log(error);
     }
   };
-
   
+  const getAllExperiences = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/api/experiences`);
+      
+      let experiencesObj = {}
+      response.data.forEach((item) => {
+        experiencesObj[item._id] = item.name
+      })
+      console.log(experiencesObj)
+
+      setExperiences(experiencesObj);
+    } catch(error) {
+      console.log(error);
+    }
+  };
   
   useEffect(() => {
     getAllCities();
     getAllAccommodations();
+    getAllExperiences();
   }, [] );
-  
-  console.log(cities)
 
-
-  const countries = {
-    AF: 'Afghanistan',
-    AL: 'Albania',
-    DZ: 'Algeria',
-    AS: 'American Samoa',
-    AD: 'Andorra',
-    AO: 'Angola',
-    AI: 'Anguilla',
-    AG: 'Antigua and Barbuda',
-    AR: 'Argentina',
-    AM: 'Armenia',
-    AW: 'Aruba',
-    AU: 'Australia',
-    AT: 'Austria',
-    AZ: 'Azerbaijan',
-    BS: 'Bahamas',
-  };
 
   const navigate = useNavigate();
 
@@ -170,7 +163,8 @@ function CreateTripPage() {
 
   return (
     <div>
-    {cities && accommodations && <Grid container>
+    {cities && accommodations && experiences && 
+    <Grid container>
         <Grid item xs={12}>
           <Typography component="h1">
             CREATE A TRIP
@@ -395,9 +389,10 @@ function CreateTripPage() {
                                       </Grid>
                                       <Grid item xs={11} spacing={3}>
                                         <Grid item xs={12}>
-                                          <TextField
+                                          <MultiSelect
                                             name={`days[${i}].experiences`}
                                             label="Experiences"
+                                            options={experiences}
                                           />
                                         </Grid>
                                       </Grid>

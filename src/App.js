@@ -13,7 +13,6 @@ import ErrorPage from './pages/ErrorPage/ErrorPage';
 import CreateTripPage from './pages/Trips/CreateTripPage/CreateTripPage';
 import TripDetailsPage from './pages/Trips/TripDetailsPage/TripDetailsPage'
 import EditTripPage from './pages/Trips/EditTripPage/EditTripPage';
-import AllCitiesPage from './pages/Cities/AllCitiesPage/AllCitiesPage';
 
 import IsPrivate from './components/IsPrivate/IsPrivate';
 import IsAnon from './components/IsAnon/IsAnon';
@@ -31,7 +30,6 @@ function App() {
         <Route path="/add-trip" element={<IsPrivate> <CreateTripPage /> </IsPrivate>}/>
         <Route path="/trips/edit/:tripId/" element={<IsPrivate> <EditTripPage /> </IsPrivate>} />
         <Route path="/trips/:tripId" element={<IsPrivate> <TripDetailsPage /> </IsPrivate>} />
-        <Route path="/cities" element={ <IsPrivate> <AllCitiesPage /> </IsPrivate>}/>
 
         <Route path="*" element={<ErrorPage />} />
       </Routes>
