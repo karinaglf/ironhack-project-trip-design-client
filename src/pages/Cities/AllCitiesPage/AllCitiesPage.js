@@ -30,6 +30,7 @@ const getAllCities = async () => {
 
     return (
         <div>
+            <Typography>Change this later</Typography>
             <Typography>All Cities Page</Typography>
             <Grid container spacing={6}>
             {cities.map((oneCity) => (
