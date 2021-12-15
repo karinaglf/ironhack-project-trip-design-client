@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { AuthContext } from '../../../context/auth.context';
 import TextField from '../../../components/FormsUI/TextFieldWrapper';
@@ -19,7 +19,6 @@ import { Form, Formik, FieldArray } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import fileService from '../../../services/file.service';
-import { string } from 'yup/lib/locale';
 
 const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
@@ -31,7 +30,6 @@ function CreateTripPage() {
   const [previewCover, setPreviewCover] = useState(
     'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800'
   );
-  const [initialValue, setInitialValue] = useState(null);
   const { user } = useContext(AuthContext);
   
   const getAllCities = async () => {
