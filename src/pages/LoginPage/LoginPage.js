@@ -102,7 +102,7 @@ function LoginPage(props) {
           )}
         </Formik>
         <p style={{ fontSize: '1.2rem', textAlign: 'center', margin: '20px' }}>
-          Don't have an account yet?<Link to={'/signup'}> Sign Uo</Link>
+          Don't have an account yet?<Link to={'/signup'}> Sign Up</Link>
         </p>
       </Paper>
     </Box>

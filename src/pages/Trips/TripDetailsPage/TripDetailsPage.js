@@ -4,6 +4,8 @@ import { useParams, Link } from 'react-router-dom';
 
 //Components
 import TripHero from '../../../components/Trips/TripHero';
+import TripCoverMsg from '../../../components/Trips/TripCoverMsg';
+import TripCitySection from '../../../components/Trips/TripCitySection';
 
 // Material UI
 import { Container, Grid, Typography, Box } from '@material-ui/core';
@@ -40,8 +42,15 @@ function TripDetailsPage() {
             <TripHero {...trip}/>
           </header>
           <main>
-            <Container maxWidth="sm"></Container>
+            <Container maxWidth="sm" sx={{ margin: "0 auto"}}></Container>
+            <TripCoverMsg {...trip}/>
 
+
+          <>
+            {trip.destination.map((oneDestination) => {
+              return <TripCitySection {...oneDestination}/>
+            })}
+          </>
           <Link to={`/trips/edit/${trip._id}`}>
             <button>Edit Project</button>
           </Link>

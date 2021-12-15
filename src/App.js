@@ -3,7 +3,6 @@ import customTheme from './theme';
 import { Routes, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar/Navbar';
-import Navbar1 from './components/Navbar/Navbar1';
 import Footer from './components/Footer/Footer';
 
 import HomePage from './pages/HomePage/HomePage';
@@ -18,8 +17,6 @@ import EditTripPage from './pages/Trips/EditTripPage/EditTripPage';
 import IsPrivate from './components/IsPrivate/IsPrivate';
 import IsAnon from './components/IsAnon/IsAnon';
 
-import { Button } from '@material-ui/core';
-
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -29,7 +26,7 @@ function App() {
 
   return (
     <>
-      <Navbar1 />
+      <Navbar />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/signup" element={<IsAnon> <SignupPage /> </IsAnon>}/>
