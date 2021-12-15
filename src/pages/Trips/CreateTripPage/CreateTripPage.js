@@ -183,7 +183,7 @@ function CreateTripPage() {
                   setFieldValue,
                 }) => (
                   <Form>
-                    <Grid container spacing={12}>
+                    <Grid container spacing={4}>
                       <Grid item xs={8}>
                         <Grid container xs={12} spacing={3}>
                           <Grid item xs={12}>
@@ -283,7 +283,7 @@ function CreateTripPage() {
                                   >
                                     <Grid
                                       container
-                                      spacing={1}
+                                      spacing={3}
                                       justifyContent="center"
                                       alignItems="center"
                                     >

@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 // Material UI - Core
 import AppBar from '@mui/material/AppBar';
@@ -27,6 +28,7 @@ const Navbar = () => {
   // Get the value from the context
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
 
+  const navigate = useNavigate();
 
 
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -41,7 +43,8 @@ const Navbar = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (url) => {
+    navigate(url);
     setAnchorElUser(null);
   };
 
@@ -140,14 +143,22 @@ const Navbar = () => {
             >
             {!isLoggedIn && (
               <>
-              <MenuItem><Link to="/signup">SignUp</Link></MenuItem>
-              <MenuItem><Link to="/login">Login</Link></MenuItem>
+              <MenuItem onClick={() => handleCloseUserMenu("/signup")}>
+                  <Typography textAlign="center">SignUp</Typography>
+              </MenuItem>
+              <MenuItem onClick={() => handleCloseUserMenu("/login")}>
+                  <Typography textAlign="center">Login</Typography>
+              </MenuItem>
               </>
             ) }
             {isLoggedIn && (
               <>
-              <MenuItem><Link to="/profile">Profile</Link></MenuItem>
-              <MenuItem onClick={logOutUser}>Logout</MenuItem>
+              <MenuItem onClick={() => handleCloseUserMenu("/profile")}>
+                  <Typography textAlign="center">Profile</Typography>
+              </MenuItem>
+              <MenuItem onClick={logOutUser}>
+                  <Typography textAlign="center">Logout</Typography>
+              </MenuItem>
               </>
             ) }
             </Menu>
