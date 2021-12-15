@@ -1,5 +1,4 @@
-import { Box, Divider } from '@material-ui/core';
-import { Stack } from '@mui/material';
+import { Box } from '@material-ui/core';
 
 function TripCoverMsg({ coverMsg, ...props }) {
   return (

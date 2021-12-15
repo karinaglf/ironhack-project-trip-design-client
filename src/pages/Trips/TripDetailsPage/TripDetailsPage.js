@@ -8,7 +8,7 @@ import TripCoverMsg from '../../../components/Trips/TripCoverMsg';
 import TripCitySection from '../../../components/Trips/TripCitySection';
 
 // Material UI
-import { Container, Grid, Typography, Box } from '@material-ui/core';
+import { Container, Grid, Box } from '@material-ui/core';
 
 const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
@@ -48,7 +48,7 @@ function TripDetailsPage() {
 
           <>
             {trip.destination.map((oneDestination) => {
-              return <TripCitySection {...oneDestination}/>
+              return <TripCitySection key={oneDestination._id} {...oneDestination}/>
             })}
           </>
           <Link to={`/trips/edit/${trip._id}`}>
