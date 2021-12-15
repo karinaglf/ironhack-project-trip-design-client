@@ -1,5 +1,6 @@
 import './App.css';
 import { ThemeProvider } from '@mui/material';
+import { CssBaseline } from '@material-ui/core';
 import customTheme from './theme';
 import { Routes, Route } from 'react-router-dom';
 
@@ -26,6 +27,7 @@ function App() {
   return (
     <ThemeProvider theme={customTheme}>
       <Navbar1 />
+      <CssBaseline />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/signup" element={<IsAnon> <SignupPage /> </IsAnon>}/>

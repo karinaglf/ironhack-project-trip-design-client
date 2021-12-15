@@ -5,11 +5,12 @@ import { Form, Formik, FieldArray } from 'formik';
 import * as Yup from 'yup';
 import { string } from 'yup/lib/locale';
 import { email } from 'yup/lib/locale';
-import { Paper, Grid } from '@material-ui/core';
+import { Paper, Grid, Container, Box, Typography } from '@material-ui/core';
 import TextField from '../../components/FormsUI/TextFieldWrapper';
 import SubmitButton from '../../components/FormsUI/SubmitButtonWrapper';
 
 import authService from '../../services/auth.service';
+import { height, maxWidth } from '@mui/system';
 
 const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
@@ -30,9 +31,9 @@ function SignupPage(props) {
 
   //Form Validation Schema
   const validationSchema = Yup.object({
-    name: Yup.string().required('Your name is Required'),
-    password: Yup.string().required('Your name is Required'),
-    email: Yup.string().required('You should add a valid email'),
+    name: Yup.string().required('Your name is required'),
+    password: Yup.string().required('Password must contain at least 8 characters and 1 symbol'),
+    email: Yup.string().required('Insert a valid email'),
   });
 
   const handleEmail = (e) => setEmail(e.target.value);
@@ -57,8 +58,7 @@ function SignupPage(props) {
 
   const handleSubmit = async (values) => {
     try {
-      
-      const authToken = localStorage.getItem("authToken");
+      const authToken = localStorage.getItem('authToken');
       await axios.post(`${API_URL}/auth/signup`, values, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
@@ -72,61 +72,50 @@ function SignupPage(props) {
   };
 
   return (
-    <div className="SignupPage">
-      <h1>Sign Up</h1>
-
-      <Paper elevation="5" sx={{ p:5 }}>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
+      <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh'}}>
+        <Paper
+          elevation={5}
+          style={{
+            padding: '50px',
+            border: '1px solid lightgrey',
+            margin: '0 auto',
+            width: '600px'
+          }}
         >
-          {({ values, errors, isSubmitting, isValidating, setFieldValue }) => (
-            <Form>
-              <Grid container spacing={4}>
-                <Grid item xs={12}>
-                  <TextField name="name" label="First Name" />
+          <Typography>Sign Up</Typography>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({
+              values,
+              errors,
+              isSubmitting,
+              isValidating,
+              setFieldValue,
+            }) => (
+              <Form>
+                <Typography m={5}>{errorMessage}</Typography>
+                <Grid container spacing={4}>
+                  <Grid item xs={12}>
+                    <TextField name="name" label="First Name" />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField name="email" label="Email" />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField name="password" label="Password" />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <SubmitButton>Submit Form</SubmitButton>
+                  </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                  <TextField name="email" label="Email" />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField name="password" label="Password" />
-                </Grid>
-                <Grid item xs={12}>
-                  <SubmitButton>Submit Form</SubmitButton>
-                  <pre>{JSON.stringify(errors, null, 6)}</pre>
-                  <pre>{JSON.stringify(values, null, 6)}</pre>
-                </Grid>
-              </Grid>
-            </Form>
-          )}
-        </Formik>
-      </Paper>
-
-      <form onSubmit={handleSignupSubmit}>
-        <label>Email:</label>
-        <input type="text" name="email" value={email} onChange={handleEmail} />
-
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
-
-        <label>Name:</label>
-        <input type="text" name="name" value={name} onChange={handleName} />
-
-        <button type="submit">Sign Up</button>
-      </form>
-
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-      <p>Already have account?</p>
-      <Link to={'/login'}> Login</Link>
-    </div>
+              </Form>
+            )}
+          </Formik>
+        </Paper>
+      </Box>
   );
 }
 
