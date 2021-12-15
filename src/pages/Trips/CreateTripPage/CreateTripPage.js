@@ -31,9 +31,8 @@ function CreateTripPage() {
   const [previewCover, setPreviewCover] = useState(
     'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800'
   );
+  const [initialValue, setInitialValue] = useState(null);
   const { user } = useContext(AuthContext);
-
-  const userId = user._id
   
   const getAllCities = async () => {
     try {
@@ -87,7 +86,6 @@ function CreateTripPage() {
     getAllExperiences();
   }, [] );
 
-
   const navigate = useNavigate();
 
   //Form Initial Values
@@ -99,7 +97,7 @@ function CreateTripPage() {
     duration: 3,
     pax: 2,
     coverMsg: "",
-    createdBy: userId,
+    createdBy: user?._id,
     destination: [{
       city: "",
       accommodations: []
@@ -132,13 +130,6 @@ function CreateTripPage() {
     }
   };
 
-  // const handleSubmit = (values, { setSubmitting }) => {
-  //   setTimeout(() => {
-  //     alert(JSON.stringify(values, null, 2));
-  //     setSubmitting(false);
-  //   }, 1000);
-  // };
-
   // Handle File Upload
   const handleFileUpload = async (e, setFieldValue) => {
     try {
@@ -157,13 +148,11 @@ function CreateTripPage() {
   };
 
   return (
-    <div>
+    <>
     {cities && accommodations && experiences && 
     <Grid container>
         <Grid item xs={12}>
-          <Typography component="h1" sx={{fontWeight: '700'}}>
-            CREATE A TRIP
-          </Typography>
+          <h1>Create a Trip</h1>
         </Grid>
         <hr />
         <Grid item xs={12}>
@@ -236,7 +225,7 @@ function CreateTripPage() {
                       <hr />
                       <Grid container spacing={3}>
                         <Grid item xs={12}>
-                          <Typography component="h2">Trip Details</Typography>
+                        <h2>Trip Details</h2>
                         </Grid>
 
                         <Grid item xs={12}>
@@ -264,8 +253,8 @@ function CreateTripPage() {
 
                       <Grid container spacing={3}>
                         <Grid item xs={12}>
-                          <Typography component="h2" align="center">Destination</Typography>
-                        </Grid>
+                        <h2>Destination</h2>
+      </Grid>
 
                         <Grid item xs={12}>
                           <FieldArray name="destination">
@@ -288,8 +277,8 @@ function CreateTripPage() {
                                       alignItems="center"
                                     >
                                       <Grid item xs={12}>
-                                        <Typography component="h3" sx={{mb: 2, mr: 2,}}>
-                                          City #{i + 1}
+                                        <Typography component="h3" sx={{mb: 2, mr: 2}}>
+                                          <strong>City #{i + 1}</strong>
                                         </Typography>
                                       </Grid>
                                       <Grid item xs={11} >
@@ -338,7 +327,7 @@ function CreateTripPage() {
                       <hr />
                       <Grid container spacing={3}>
                         <Grid item xs={12}>
-                          <Typography component="h2">Days</Typography>
+                          <h2>Day by Day</h2>
                         </Grid>
 
                         <Grid item xs={12}>
@@ -416,7 +405,7 @@ function CreateTripPage() {
         </Grid>
       </Grid>
     }
-    </div>
+    </>
   );
 }
 

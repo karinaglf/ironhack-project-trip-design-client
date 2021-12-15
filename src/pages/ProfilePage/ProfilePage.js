@@ -46,7 +46,6 @@ function ProfilePage() {
       <h2>Hello {currentUser.name}</h2>
       
           <div>
-            <img className="profile-img" src={user.image} alt="profile" />
             <Grid container spacing={6}>
               {currentUser.createdTrips.map((oneTrip) => (
                 <Grid key={oneTrip._id} item xs={6} md={3}>
