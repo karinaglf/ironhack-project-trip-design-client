@@ -18,7 +18,7 @@ function TripHero({tripName, coverImg }) {
         <Box fullWidth sx={{...style, backgroundImage: `url(${coverImg})`
         }}
       >
-        <Typography variant="h2">{tripName}</Typography>
+        <Typography variant="h2" sx={{ fontWeight: 'bold'}}>{tripName}</Typography>
       </Box>
      );
 }

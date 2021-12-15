@@ -15,7 +15,7 @@ function HomePage() {
       <hr / >
       <Typography>Trips</Typography>
       <Link to={`/add-trip`}>
-        <Button>Add a Trip</Button>
+        <Button variant="contained" color="primary">Add a Trip</Button>
       </Link>
       <Link to={`/trips`}>
         <Button>All Trips</Button>

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import React from 'react';
 
 // Material UI - Core
 import AppBar from '@mui/material/AppBar';
@@ -17,19 +16,21 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
 
 
 const pages = [];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = [];
 
 const Navbar = () => {
   // Get the value from the context
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
 
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -48,16 +49,16 @@ const Navbar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-         <Link to="/">
-          <Typography
+          <Link to="/"><Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-          <HomeIcon />
+            LOGO
           </Typography>
-         </Link>
+          </Link>
+
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -116,7 +117,10 @@ const Navbar = () => {
 
           <Box sx={{ flexGrow: 0 }}>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt={user.name} src={user.image} />
+              {user ?
+                 <Avatar alt="user avatar" src={user.image} />: 
+                 <Avatar alt="" src="/static/images/avatar/2.jpg" />
+              }
               </IconButton>
             <Menu
               sx={{ mt: '45px' }}
@@ -134,11 +138,18 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+            {!isLoggedIn && (
+              <>
+              <MenuItem><Link to="/signup">SignUp</Link></MenuItem>
+              <MenuItem><Link to="/login">Login</Link></MenuItem>
+              </>
+            ) }
+            {isLoggedIn && (
+              <>
+              <MenuItem><Link to="/profile">Profile</Link></MenuItem>
+              <MenuItem onClick={logOutUser}>Logout</MenuItem>
+              </>
+            ) }
             </Menu>
           </Box>
         </Toolbar>

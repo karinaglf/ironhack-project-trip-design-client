@@ -1,8 +1,11 @@
 import './App.css';
+import { ThemeProvider } from '@mui/material';
+import customTheme from './theme';
 import { Routes, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar/Navbar';
 import Navbar1 from './components/Navbar/Navbar1';
+import Footer from './components/Footer/Footer';
 
 import HomePage from './pages/HomePage/HomePage';
 import SignupPage from './pages/SignupPage/SignupPage';
@@ -16,11 +19,13 @@ import EditTripPage from './pages/Trips/EditTripPage/EditTripPage';
 import IsPrivate from './components/IsPrivate/IsPrivate';
 import IsAnon from './components/IsAnon/IsAnon';
 
+import { Button } from '@material-ui/core';
+
 function App() {
 
   return (
-    <>
-      <Navbar />
+    <ThemeProvider theme={customTheme}>
+      <Navbar1 />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/signup" element={<IsAnon> <SignupPage /> </IsAnon>}/>
@@ -32,7 +37,8 @@ function App() {
 
             <Route path="*" element={<ErrorPage />} />
           </Routes>
-    </>
+        <Footer />
+    </ThemeProvider>
   );
 }
 
