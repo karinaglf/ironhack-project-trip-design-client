@@ -161,7 +161,7 @@ function CreateTripPage() {
     {cities && accommodations && experiences && 
     <Grid container>
         <Grid item xs={12}>
-          <Typography component="h1">
+          <Typography component="h1" sx={{fontWeight: '700'}}>
             CREATE A TRIP
           </Typography>
         </Grid>
@@ -299,7 +299,8 @@ function CreateTripPage() {
                                             label="City"
                                             options={cities}
                                           />
-                                        </Grid>                                      
+                                        </Grid>
+                                        <></>
                                         <Grid item xs={12}>
                                           <MultiSelect
                                             name={`destination[${i}].accommodations`}
@@ -308,7 +309,6 @@ function CreateTripPage() {
                                           />
                                         </Grid>
                                       </Grid>
-
                                       <Grid item xs={1}>
                                         <Button onClick={() => remove(i)}>
                                           Delete
@@ -400,10 +400,12 @@ function CreateTripPage() {
                         </Grid>
                       </Grid>
                       <hr />
+                      <Grid container justifyContent='center'>
                       <Grid item xs={12}>
                         <SubmitButton>Submit Form</SubmitButton>
                         <pre>{JSON.stringify(errors, null, 6)}</pre>
                         <pre>{JSON.stringify(values, null, 6)}</pre>
+                      </Grid>
                       </Grid>
                     </Grid>
                   </Form>

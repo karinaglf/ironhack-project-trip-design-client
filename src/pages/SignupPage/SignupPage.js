@@ -1,23 +1,15 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Form, Formik, FieldArray } from 'formik';
+import { Form, Formik} from 'formik';
 import * as Yup from 'yup';
-import { string } from 'yup/lib/locale';
-import { email } from 'yup/lib/locale';
-import { Paper, Grid, Container, Box, Typography } from '@material-ui/core';
+import { Paper, Grid, Box, Typography } from '@material-ui/core';
 import TextField from '../../components/FormsUI/TextFieldWrapper';
 import SubmitButton from '../../components/FormsUI/SubmitButtonWrapper';
-
-import authService from '../../services/auth.service';
-import { height, maxWidth } from '@mui/system';
 
 const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
 function SignupPage(props) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
@@ -32,29 +24,9 @@ function SignupPage(props) {
   //Form Validation Schema
   const validationSchema = Yup.object({
     name: Yup.string().required('Your name is required'),
-    password: Yup.string().required('Password must contain at least 8 characters and 1 symbol'),
-    email: Yup.string().required('Insert a valid email'),
+    email: Yup.string().email().required("Insert a valid email"),
+    password: Yup.string().required('Password is required').min(8, "Password must contain at least 8 characters, 1 uppercase and 1 symbol"),
   });
-
-  const handleEmail = (e) => setEmail(e.target.value);
-  const handlePassword = (e) => setPassword(e.target.value);
-  const handleName = (e) => setName(e.target.value);
-
-  const handleSignupSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      // Create an object representing the request body
-      const requestBody = { email, password, name };
-
-      await authService.signup(requestBody);
-
-      // If the request is successful navigate to login page
-      navigate('/login');
-    } catch (error) {
-      // If the request resolves with an error, set the error message in the state
-      setErrorMessage('Something went wrong');
-    }
-  };
 
   const handleSubmit = async (values) => {
     try {
@@ -74,7 +46,7 @@ function SignupPage(props) {
   return (
       <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh'}}>
         <Paper
-          elevation={5}
+          elevation={2}
           style={{
             padding: '50px',
             border: '1px solid lightgrey',
@@ -82,7 +54,7 @@ function SignupPage(props) {
             width: '600px'
           }}
         >
-          <Typography>Sign Up</Typography>
+          <h1>Sign Up</h1>
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -97,7 +69,7 @@ function SignupPage(props) {
             }) => (
               <Form>
                 <Typography m={5}>{errorMessage}</Typography>
-                <Grid container spacing={4}>
+                <Grid container spacing={4} justifyContent='center' alignItems=''>
                   <Grid item xs={12}>
                     <TextField name="name" label="First Name" />
                   </Grid>
@@ -107,13 +79,16 @@ function SignupPage(props) {
                   <Grid item xs={12}>
                     <TextField name="password" label="Password" />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid item xs={12} style={{display: 'flex', justifyContent: 'center', alignItems: 'center',}}>
                     <SubmitButton>Submit Form</SubmitButton>
                   </Grid>
                 </Grid>
               </Form>
             )}
           </Formik>
+          <p style={{ fontSize: '1.2rem', textAlign: 'center', margin: '20px' }}>
+          Don't have an account yet?<Link to={'/login'}> Login</Link>
+        </p>
         </Paper>
       </Box>
   );

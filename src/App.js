@@ -1,6 +1,4 @@
-import './App.css';
 import { ThemeProvider } from '@mui/material';
-import { CssBaseline } from '@material-ui/core';
 import customTheme from './theme';
 import { Routes, Route } from 'react-router-dom';
 
@@ -22,12 +20,16 @@ import IsAnon from './components/IsAnon/IsAnon';
 
 import { Button } from '@material-ui/core';
 
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
 function App() {
 
   return (
-    <ThemeProvider theme={customTheme}>
+    <>
       <Navbar1 />
-      <CssBaseline />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/signup" element={<IsAnon> <SignupPage /> </IsAnon>}/>
@@ -36,11 +38,10 @@ function App() {
             <Route path="/add-trip" element={<IsPrivate> <CreateTripPage /> </IsPrivate>}/>
             <Route path="/trips/edit/:tripId/" element={<IsPrivate> <EditTripPage /> </IsPrivate>} />
             <Route path="/trips/:tripId" element={<IsPrivate> <TripDetailsPage /> </IsPrivate>} />
-
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         <Footer />
-    </ThemeProvider>
+    </>   
   );
 }
 

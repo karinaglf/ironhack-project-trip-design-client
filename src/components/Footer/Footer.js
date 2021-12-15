@@ -1,9 +1,15 @@
-import { Typography } from "@material-ui/core"
+import { Typography, Box, Container } from '@material-ui/core';
 
 export default function Footer() {
   return (
-      <>
-          <Typography variant='h5'>This is the footer</Typography>
-      </>
-  )
+    <>
+        <Container maxWidth="md" position="static" color="white">
+          <Box sx={{display: 'flex', justifyContent: 'center'}}>
+            <Typography variant="body1">
+              © 2021 Developed by Karina Freitas 
+            </Typography>
+          </Box>
+        </Container>
+    </>
+  );
 }

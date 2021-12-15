@@ -126,7 +126,7 @@ const Navbar = () => {
               }
               </IconButton>
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: '45px'}}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{

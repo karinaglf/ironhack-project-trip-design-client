@@ -22,6 +22,7 @@ const ButtonWrapper = ({
   return (
     <Button
       {...configButton}
+      size="large"
     >
       {children}
     </Button>
