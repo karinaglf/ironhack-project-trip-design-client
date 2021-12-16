@@ -19,8 +19,8 @@ h2 {
   font-size: 1.8rem;
 }
 main {
-  margin-top: 90px;
-  max-width: 90vw;
+  margin: 90px 10px;
+  max-width: 95vw;
 }
 a {
   list-style: none;

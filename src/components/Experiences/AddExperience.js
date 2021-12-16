@@ -86,21 +86,14 @@ function AddExperience({ refreshList }) {
   return (
     <>
       {cities && (
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+        <Box>
           <Paper
             elevation={2}
             style={{
               padding: '40px',
               border: '1px solid lightgrey',
-              margin: '0 auto',
-              width: '600px',
-            }}
+              margin: '0 auto'
+              }}
           >
             <h2>Add Experience </h2>
             <Formik
@@ -162,7 +155,6 @@ function AddExperience({ refreshList }) {
                       }}
                     >
                       <SubmitButton>Submit</SubmitButton>
-                      <pre>{JSON.stringify(values, null, 6)}</pre>
                     </Grid>
                   </Grid>
                 </Form>

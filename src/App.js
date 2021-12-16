@@ -12,7 +12,6 @@ import CreateTripPage from './pages/Trips/CreateTripPage/CreateTripPage';
 import TripDetailsPage from './pages/Trips/TripDetailsPage/TripDetailsPage'
 import EditTripPage from './pages/Trips/EditTripPage/EditTripPage';
 import ManageData from './pages/ManageData/ManageData';
-import Experiences from './pages/Inventory/Experiences';
 
 import IsPrivate from './components/IsPrivate/IsPrivate';
 import IsAnon from './components/IsAnon/IsAnon';
@@ -34,7 +33,6 @@ function App() {
             <Route path="/login" element={<IsAnon> <LoginPage /> </IsAnon>}/>
             <Route path="/profile" element={<IsPrivate> <ProfilePage /> </IsPrivate>}/>
             <Route path="/manage-data" element={<IsPrivate> <ManageData /> </IsPrivate>}/>
-            <Route path="/experiences" element={<IsPrivate> <Experiences /> </IsPrivate>}/>
             <Route path="/add-trip" element={<IsPrivate> <CreateTripPage /> </IsPrivate>}/>
             <Route path="/trips/edit/:tripId/" element={<IsPrivate> <EditTripPage /> </IsPrivate>} />
             <Route path="/trips/:tripId" element={<IsPrivate> <TripDetailsPage /> </IsPrivate>} />
