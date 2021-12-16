@@ -15,7 +15,7 @@ import {
 function TripItemCard({ name, category, description, externalUrl, img, affiliateLink, _id }) {
   
     return (
-      <Card sx={{ maxWidth: 300 }}>
+      <Card sx={{ width: 300 }}>
         <CardMedia
           component="img"
           height="160"

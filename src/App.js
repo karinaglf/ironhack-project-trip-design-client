@@ -13,6 +13,7 @@ import ErrorPage from './pages/ErrorPage/ErrorPage';
 import CreateTripPage from './pages/Trips/CreateTripPage/CreateTripPage';
 import TripDetailsPage from './pages/Trips/TripDetailsPage/TripDetailsPage'
 import EditTripPage from './pages/Trips/EditTripPage/EditTripPage';
+import ManageData from './pages/ManageData/ManageData';
 
 import IsPrivate from './components/IsPrivate/IsPrivate';
 import IsAnon from './components/IsAnon/IsAnon';
@@ -28,10 +29,12 @@ function App() {
     <>
       <Navbar />
           <Routes>
+          <Route path="/abs" element={<HomePage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="/signup" element={<IsAnon> <SignupPage /> </IsAnon>}/>
             <Route path="/login" element={<IsAnon> <LoginPage /> </IsAnon>}/>
             <Route path="/profile" element={<IsPrivate> <ProfilePage /> </IsPrivate>}/>
+            <Route path="/manage-data" element={<IsPrivate> <ManageData /> </IsPrivate>}/>
             <Route path="/add-trip" element={<IsPrivate> <CreateTripPage /> </IsPrivate>}/>
             <Route path="/trips/edit/:tripId/" element={<IsPrivate> <EditTripPage /> </IsPrivate>} />
             <Route path="/trips/:tripId" element={<IsPrivate> <TripDetailsPage /> </IsPrivate>} />

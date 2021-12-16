@@ -5,7 +5,7 @@ import TripsCard from '../../components/Trips/TripCard';
 import userService from '../../services/user.service';
 
 // Material UI
-import { Grid, Button } from '@material-ui/core';
+import { Grid, Button, Paper, Box } from '@material-ui/core';
 
 function ProfilePage() {
   const { user } = useContext(AuthContext);
@@ -35,6 +35,17 @@ function ProfilePage() {
     <>
 
     {errorMessage && <p>{errorMessage}</p>}
+    <div>
+      <Grid container spacing={2}>
+        <Grid alignItems='baseline' item xs={3}>
+          <Box>Side Bar</Box>
+        </Grid>
+        <Grid item xs={9}>
+          <Box>xs=6</Box>
+          <Paper height="100%">xs=6</Paper>
+        </Grid>
+      </Grid>
+    </div>
 
       <h1>Profile Page</h1>
       <Link to={`/add-trip`}>

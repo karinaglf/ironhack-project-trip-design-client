@@ -6,6 +6,7 @@ import { useParams, Link } from 'react-router-dom';
 import TripHero from '../../../components/Trips/TripHero';
 import TripCoverMsg from '../../../components/Trips/TripCoverMsg';
 import TripCitySection from '../../../components/Trips/TripCitySection';
+import TripDaysSection from '../../../components/Trips/TripDaysSection';
 
 // Material UI
 import { Container, Grid, Box } from '@material-ui/core';
@@ -47,13 +48,16 @@ function TripDetailsPage() {
 
 
           <>
-            {trip.destination.map((oneDestination) => {
-              return <TripCitySection key={oneDestination._id} {...oneDestination}/>
+            {trip.destination.map((oneDestination, index) => {
+              return <TripCitySection key={oneDestination._id} {...oneDestination} index={index}/>
             })}
           </>
-          <Link to={`/trips/edit/${trip._id}`}>
-            <button>Edit Project</button>
-          </Link>
+
+          <>
+            {trip.days.map((oneDay, index) => {
+              return <TripDaysSection key={oneDay._id} {...oneDay} index={index}/>
+            })}
+          </>
           </main>
         </>
       )}

@@ -49,7 +49,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ background: 'white' }}>
+    <AppBar elevation={1} sx={{ background: 'white' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link to="/"><Typography
@@ -126,7 +126,7 @@ const Navbar = () => {
               }
               </IconButton>
             <Menu
-              sx={{ mt: '45px'}}
+              sx={{ mt: '45px', display: 'flex', direction: 'column'}}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
