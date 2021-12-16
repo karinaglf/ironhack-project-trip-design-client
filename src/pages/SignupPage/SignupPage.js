@@ -44,6 +44,7 @@ function SignupPage(props) {
   };
 
   return (
+    <main>
       <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh'}}>
         <Paper
           elevation={2}
@@ -91,6 +92,7 @@ function SignupPage(props) {
         </p>
         </Paper>
       </Box>
+      </main>
   );
 }
 

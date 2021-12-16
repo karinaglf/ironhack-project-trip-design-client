@@ -32,7 +32,7 @@ function ProfilePage() {
 
   console.log(currentUser)
   return (
-    <>
+    <main>
 
     {errorMessage && <p>{errorMessage}</p>}
     <div>
@@ -71,7 +71,7 @@ function ProfilePage() {
           </div>
           </>
           )}
-    </>
+    </main>
   );
 }
 

@@ -113,7 +113,7 @@ function CreateTripPage() {
       .max(30, 'max 30 chars'),
   });
 
-  //Handle Submit - RETURN THIS AFTER
+  //Handle Submit
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       await axios.post(`${API_URL}/api/trips`, values);

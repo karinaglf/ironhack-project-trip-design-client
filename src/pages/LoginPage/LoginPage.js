@@ -53,6 +53,7 @@ function LoginPage(props) {
   };
 
   return (
+    <main>
     <Box
       sx={{
         display: 'flex',
@@ -106,6 +107,7 @@ function LoginPage(props) {
         </p>
       </Paper>
     </Box>
+</main>
   );
 }
 
