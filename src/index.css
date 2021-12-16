@@ -36,6 +36,20 @@ a {
 a:hover {
   color: orange; 
 }
+#menu-appbar .MuiMenu-paper {
+  margin-top: 40px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+#menu-appbar .MuiTypography-body1{
+  font-size: 1.1rem !important;
+  margin: 5px !important;
+}
+.select-multiple-menu {
+  margin: 5px 20px !important;
+}
 .MuiMenu-list {
   display: flex;
   flex-direction: column;

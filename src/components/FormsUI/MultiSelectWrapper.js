@@ -86,7 +86,7 @@ const MultiSelectWrapper = ({
         >
           {Object.keys(options).map((item, pos) => {
         return (
-          <MenuItem sx={{padding: '10px'}} key={pos} value={item}>
+          <MenuItem className={'select-multiple-menu'} sx={{padding: '10px'}} key={pos} value={item}>
             {options[item]}
           </MenuItem>
           )

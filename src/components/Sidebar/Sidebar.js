@@ -1,50 +1,67 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ListItem, List, ListItemText} from '@material-ui/core';
+import { ListItem, List, ListItemText } from '@material-ui/core';
 import { Button } from '@mui/material';
 import { ChevronRight } from '@mui/icons-material';
 
 function Sidebar({ isAdmin }) {
-
   return (
     <>
       <div className="sidebar">
         <List
           sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
         >
-         <Link to={'/profile'}>
-          <Button variant="contained" style={{backgroundColor: '#4050B5', marginBottom:'30px'}} endIcon={<ChevronRight />}>
-            Request Trip
-          </Button>
-          </Link>
+          {!isAdmin && (
+            <>
+              <Link to={'/profile'}>
+                <Button
+                  variant="contained"
+                  style={{ backgroundColor: '#4050B5', marginBottom: '30px' }}
+                  endIcon={<ChevronRight />}
+                >
+                  Request Trip
+                </Button>
+              </Link>
 
-          <ListItem>
-            <Link to={'/profile'}>
-              <ListItemText primary="Profile" />
-            </Link>
-          </ListItem>
+              <ListItem>
+                <Link to={'/profile'}>
+                  <ListItemText primary="Profile" />
+                </Link>
+              </ListItem>
 
-          <ListItem>
-            <Link to={'/'}>
-              <ListItemText primary="Travel Tips" />
-            </Link>
-          </ListItem>
+              <ListItem>
+                <Link to={'/'}>
+                  <ListItemText primary="Travel Tips" />
+                </Link>
+              </ListItem>
 
-          <ListItem>
-            <Link to={'/'}>
-              <ListItemText primary="Checklist" />
-            </Link>
-          </ListItem>
+              <ListItem>
+                <Link to={'/'}>
+                  <ListItemText primary="Checklist" />
+                </Link>
+              </ListItem>
 
-          <ListItem>
-            <Link to={'/'}>
-              <ListItemText primary="Resources" />
-            </Link>
-          </ListItem>
-
+              <ListItem>
+                <Link to={'/'}>
+                  <ListItemText primary="Resources" />
+                </Link>
+              </ListItem>
+            </>
+          )}
 
           {isAdmin && (
             <>
+
+            <Link to={'/profile'}>
+                <Button
+                  variant="contained"
+                  style={{ backgroundColor: '#4050B5', marginBottom: '30px' }}
+                  endIcon={<ChevronRight />}
+                >
+                  Dashboard
+                </Button>
+              </Link>
+
               <ListItem>
                 <Link to={'/'}>
                   <ListItemText primary="Trips" />
@@ -70,7 +87,9 @@ function Sidebar({ isAdmin }) {
                 <Link to={'/restaurants'}>
                   <ListItemText primary="Restaurants" />
                 </Link>
-                <Link to={'/customers'}>
+              </ListItem>
+              <ListItem>
+                <Link to={'/restaurants'}>
                   <ListItemText primary="Customers" />
                 </Link>
               </ListItem>
