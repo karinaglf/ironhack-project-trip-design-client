@@ -42,6 +42,7 @@ const MultiSelectWrapper = ({
   const [selection, setSelection] = React.useState([]);
 
   const handleChange = evt => {
+    console.log(evt.target)
     const { value } = evt.target;
     setFieldValue(name, value);
     setSelection(value);

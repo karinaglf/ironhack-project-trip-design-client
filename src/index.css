@@ -19,7 +19,8 @@ h2 {
   font-size: 1.8rem;
 }
 main {
-  margin: 90px 10px;
+  margin: 0 auto;
+  margin-top: 90px;
   max-width: 95vw;
 }
 a {
@@ -34,4 +35,10 @@ a:hover {
   display: flex;
   flex-direction: column;
   align-items: baseline;
+}
+.border-box {
+    border: 1px solid #C4C4C4;
+    border-radius: 8px;
+    padding: 20px 20px 30px;
+    margin: 20px 0;
 }

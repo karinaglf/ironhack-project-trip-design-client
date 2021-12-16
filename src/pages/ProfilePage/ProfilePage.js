@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
 import TripsCard from '../../components/Trips/TripCard';
 import userService from '../../services/user.service';
+import Sidebar from "../../components/Sidebar/Sidebar"
 
 // Material UI
 import { Grid, Button, Paper, Box } from '@material-ui/core';
@@ -33,25 +34,13 @@ function ProfilePage() {
   console.log(currentUser)
   return (
     <main>
-
-    {errorMessage && <p>{errorMessage}</p>}
-    <div>
-      <Grid container spacing={2}>
-        <Grid alignItems='baseline' item xs={3}>
-          <Box>Side Bar</Box>
-        </Grid>
-        <Grid item xs={9}>
-          <Box>xs=6</Box>
-          <Paper height="100%">xs=6</Paper>
-        </Grid>
+    
+    <Grid container spacing={2}>
+      <Grid item xs={12} md={2}>
+        <Sidebar />
       </Grid>
-    </div>
-
-      <h1>Profile Page</h1>
-      <Link to={`/add-trip`}>
-        <Button>Create Trip</Button>
-      </Link>
-      
+      <Grid item xs={12} md={10}>
+      <Box sx={{margin: '0 auto'}}>
       {currentUser && (
       <>
       <h2>Hello {currentUser.name}</h2>
@@ -71,6 +60,11 @@ function ProfilePage() {
           </div>
           </>
           )}
+      </Box>
+      </Grid>
+    </Grid>
+
+      
     </main>
   );
 }

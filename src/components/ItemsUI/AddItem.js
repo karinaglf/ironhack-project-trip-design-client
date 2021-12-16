@@ -4,19 +4,21 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Paper, Grid, Box, Typography, Input, Button } from '@material-ui/core';
 import { Link, useNavigate } from 'react-router-dom';
-import TextField from '../../components/FormsUI/TextFieldWrapper';
-import SubmitButton from '../../components/FormsUI/SubmitButtonWrapper';
-import Select from '../../components/FormsUI/SelectWrapper';
+import TextField from '../FormsUI/TextFieldWrapper';
+import SubmitButton from '../FormsUI/SubmitButtonWrapper';
+import Select from '../FormsUI/SelectWrapper';
 import fileService from '../../services/file.service';
 
 const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
-function AddExperience({ refreshList }) {
+function AddExperience({ refreshList, type, setOpen}) {
   const [isUploaded, setIsUploaded] = useState(false);
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [cities, setCities] = useState();
 
   const navigate = useNavigate();
+
+  const typeCapitalized = type.charAt(0).toUpperCase() + type.slice(1)
 
   const getAllCities = async () => {
     try {
@@ -56,11 +58,12 @@ function AddExperience({ refreshList }) {
   //Handle Submit
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      await axios.post(`${API_URL}/api/experiences`, values);
+      await axios.post(`${API_URL}/api/${type}`, values);
 
       //console.log(`Request Body`, values);
 
       setSubmitting(false);
+      setOpen(false);
       refreshList();
     } catch (error) {
       console.log('Error while submitting create a trip form');
@@ -86,16 +89,8 @@ function AddExperience({ refreshList }) {
   return (
     <>
       {cities && (
-        <Box>
-          <Paper
-            elevation={2}
-            style={{
-              padding: '40px',
-              border: '1px solid lightgrey',
-              margin: '0 auto'
-              }}
-          >
-            <h2>Add Experience </h2>
+        <>
+            <h2>Add {typeCapitalized} </h2>
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -160,8 +155,7 @@ function AddExperience({ refreshList }) {
                 </Form>
               )}
             </Formik>
-          </Paper>
-        </Box>
+            </>
       )}
     </>
   );
