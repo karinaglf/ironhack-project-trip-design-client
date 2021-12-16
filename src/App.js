@@ -11,8 +11,7 @@ import ErrorPage from './pages/ErrorPage/ErrorPage';
 import CreateTripPage from './pages/Trips/CreateTripPage/CreateTripPage';
 import TripDetailsPage from './pages/Trips/TripDetailsPage/TripDetailsPage'
 import EditTripPage from './pages/Trips/EditTripPage/EditTripPage';
-import Dashboard from './pages/Dashboard/Dashboard';
-import Experiences from './pages/ItemsList/ExperiencesList'
+import Experiences from './pages/ItemsPage/ExperiencesPage';
 
 import IsPrivate from './components/IsPrivate/IsPrivate';
 import IsAnon from './components/IsAnon/IsAnon';
@@ -33,8 +32,7 @@ function App() {
             <Route path="/signup" element={<IsAnon> <SignupPage /> </IsAnon>}/>
             <Route path="/login" element={<IsAnon> <LoginPage /> </IsAnon>}/>
             <Route path="/profile" element={<IsPrivate> <ProfilePage /> </IsPrivate>}/>
-            <Route path="/dashboard" element={<IsPrivate> <Dashboard /> </IsPrivate>}/>
-            <Route path="/experiences" element={<IsPrivate> <Dashboard /> </IsPrivate>}/>
+            <Route path="/experiences" element={<IsPrivate> <Experiences /> </IsPrivate>}/>
             <Route path="/add-trip" element={<IsPrivate> <CreateTripPage /> </IsPrivate>}/>
             <Route path="/trips/edit/:tripId/" element={<IsPrivate> <EditTripPage /> </IsPrivate>} />
             <Route path="*" element={<ErrorPage />} />

@@ -1,47 +1,83 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Collapse from '@mui/material/Collapse';
-import Home from '@mui/icons-material/Home';
-import ListSubheader from '@mui/material/ListSubheader';
-import List from '@mui/material/List';
-import { ListItem } from '@material-ui/core';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import DraftsIcon from '@mui/icons-material/Drafts';
-import SendIcon from '@mui/icons-material/Send';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
-import StarBorder from '@mui/icons-material/StarBorder';
-import SidebarData from './SidebarData';
-import ItemCard from '../ItemsUI/ItemCard';
+import { ListItem, List, ListItemText} from '@material-ui/core';
+import { Button } from '@mui/material';
+import { ChevronRight } from '@mui/icons-material';
 
-function Sidebar() {
-  const [sidebar, setSidebar] = useState(false);
-
-  const showSidebar = () => setSidebar(!sidebar);
+function Sidebar({ isAdmin }) {
 
   return (
     <>
-      <div className="navbar">
-        <Link to="#" className="menu-bars">
-          <Collapse onClick={showSidebar} />
-        </Link>
-      </div>
-      <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
+      <div className="sidebar">
         <List
           sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
         >
-          {SidebarData.map((item, index) => (
-            <ListItem key={item} disableGutters>
-              <Link to={item.path}>
-                <ListItemText primary={item.title} />
-              </Link>
-            </ListItem>
-          ))}
+         <Link to={'/profile'}>
+          <Button variant="contained" style={{backgroundColor: '#4050B5', marginBottom:'30px'}} endIcon={<ChevronRight />}>
+            Request Trip
+          </Button>
+          </Link>
+
+          <ListItem>
+            <Link to={'/profile'}>
+              <ListItemText primary="Profile" />
+            </Link>
+          </ListItem>
+
+          <ListItem>
+            <Link to={'/'}>
+              <ListItemText primary="Travel Tips" />
+            </Link>
+          </ListItem>
+
+          <ListItem>
+            <Link to={'/'}>
+              <ListItemText primary="Checklist" />
+            </Link>
+          </ListItem>
+
+          <ListItem>
+            <Link to={'/'}>
+              <ListItemText primary="Resources" />
+            </Link>
+          </ListItem>
+
+
+          {isAdmin && (
+            <>
+              <ListItem>
+                <Link to={'/'}>
+                  <ListItemText primary="Trips" />
+                </Link>
+              </ListItem>
+
+              <ListItem>
+                <Link to={'/destinations'}>
+                  <ListItemText primary="Destinations" />
+                </Link>
+              </ListItem>
+              <ListItem>
+                <Link to={'/accommodations'}>
+                  <ListItemText primary="Accommodations" />
+                </Link>
+              </ListItem>
+              <ListItem>
+                <Link to={'/experiences'}>
+                  <ListItemText primary="Experiences" />
+                </Link>
+              </ListItem>
+              <ListItem>
+                <Link to={'/restaurants'}>
+                  <ListItemText primary="Restaurants" />
+                </Link>
+                <Link to={'/customers'}>
+                  <ListItemText primary="Customers" />
+                </Link>
+              </ListItem>
+            </>
+          )}
         </List>
-      </nav>
+      </div>
     </>
   );
 }

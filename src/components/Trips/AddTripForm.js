@@ -115,8 +115,8 @@ function AddTripForm() {
   const validationSchema = Yup.object({
     tripName: Yup.string()
       .required('Trip Name is Required')
-      .min(2, 'at least 2')
-      .max(30, 'max 30 chars'),
+      .min(20, 'at least 30 chars')
+      .max(40, 'max 60 chars'),
   });
 
   //Handle Submit

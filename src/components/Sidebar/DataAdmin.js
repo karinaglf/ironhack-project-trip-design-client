@@ -25,6 +25,12 @@ const SidebarData = [
       path: '/experiences',
       icon: <Home />,
       cName: 'nav-text'
+    },
+    {
+      title: 'Accommodations',
+      path: '/accommodations',
+      icon: <Home />,
+      cName: 'nav-text'
     }
   ];
 

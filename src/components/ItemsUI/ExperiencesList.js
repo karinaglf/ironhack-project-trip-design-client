@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import ItemCard from '../../components/ItemsUI/ItemCard';
-import AddItem from '../../components/ItemsUI/AddItem';
-import EditItem from '../../components/ItemsUI/EditItem';
+import ItemCard from './ItemCard';
+import AddItem from './AddItem';
+import EditItem from './EditItem';
 import { Grid, Button, Paper, Box } from '@material-ui/core';
-import SearchBar from '../../components/ItemsUI/SearchItem';
-import AddItemDialog from '../../components/ItemsUI/AddItemDialog';
+import SearchBar from './SearchItem';
+import AddItemDialog from './AddItemDialog';
 
 const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
@@ -47,7 +47,7 @@ function ExperiencesList() {
       <Box className="border-box">
         <Grid container spacing={3} justifyContent="center" alignItems="center">
           <Grid item xs={9}>
-            <SearchBar searchList={searchList} />
+            <SearchBar searchList={searchList}  type={'experiences'}/>
           </Grid>
           <Grid item xs={3}>
             <AddItemDialog type={'experiences'} refreshList={getAllItems} />
