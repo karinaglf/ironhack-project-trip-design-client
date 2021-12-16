@@ -280,15 +280,14 @@ function CreateTripPage() {
                                         </Typography>
                                       </Grid>
                                       <Grid item xs={11} >
-                                        <Grid item xs={12}>
+                                        <Grid item xs={12 } style={{marginBottom: 20}}>
                                           <Select
                                             name={`destination[${i}].city`}
                                             label="City"
                                             options={cities}
                                           />
                                         </Grid>
-                                        <></>
-                                        <Grid item xs={12}>
+                                        <Grid item xs={12} style={{marginBottom: 20}}>
                                           <MultiSelect
                                             name={`destination[${i}].accommodations`}
                                             label="Accommodations"
@@ -354,7 +353,7 @@ function CreateTripPage() {
                                         </Typography>
                                       </Grid>
                                       <Grid item xs={11} spacing={3}>
-                                        <Grid item xs={12}>
+                                        <Grid item xs={12} style={{marginBottom: 20}}>
                                           <MultiSelect
                                             name={`days[${i}].experiences`}
                                             label="Experiences"

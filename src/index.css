@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 body {
-  margin: 0;
+  margin: 0 auto;
   font-family: 'Roboto', sans-serif;
 }
 h1, h2, h3 {
@@ -20,7 +20,6 @@ h2 {
 }
 main {
   max-width: 90vw;
-  margin: 0 auto;
 }
 a {
   list-style: none;
@@ -29,4 +28,9 @@ a {
 }
 a:hover {
   color: orange; 
+}
+.MuiMenu-list {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
 }

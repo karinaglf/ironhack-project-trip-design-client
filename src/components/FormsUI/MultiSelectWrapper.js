@@ -21,31 +21,6 @@ const MenuProps = {
   },
 };
 
-const arrayExample = [
-  'Porto',
-  'Lisbon',
-  'Algarve',
-  'Évora'
-];
-
-const objExample = {
-  AF: 'Afghanistan',
-  AL: 'Albania',
-  DZ: 'Algeria',
-  AS: 'American Samoa',
-  AD: 'Andorra',
-  AO: 'Angola',
-  AI: 'Anguilla',
-  AG: 'Antigua and Barbuda',
-  AR: 'Argentina',
-  AM: 'Armenia',
-  AW: 'Aruba',
-  AU: 'Australia',
-  AT: 'Austria',
-  AZ: 'Azerbaijan',
-  BS: 'Bahamas',
-};
-
 function getStyles(item, selection, theme) {
   return {
     fontWeight:
@@ -110,7 +85,7 @@ const MultiSelectWrapper = ({
         >
           {Object.keys(options).map((item, pos) => {
         return (
-          <MenuItem key={pos} value={item}>
+          <MenuItem sx={{padding: '10px'}} key={pos} value={item}>
             {options[item]}
           </MenuItem>
           )
