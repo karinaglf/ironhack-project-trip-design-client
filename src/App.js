@@ -8,6 +8,7 @@ import SignupPage from './pages/SignupPage/SignupPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
+import RequestTripPage from './pages/Trips/RequestTripPage/RequestTripPage';
 import CreateTripPage from './pages/Trips/CreateTripPage/CreateTripPage';
 import TripDetailsPage from './pages/Trips/TripDetailsPage/TripDetailsPage'
 import EditTripPage from './pages/Trips/EditTripPage/EditTripPage';
@@ -37,6 +38,7 @@ function App() {
             <Route path="/experiences" element={<IsPrivate> <Experiences /> </IsPrivate>}/>
             <Route path="/accommodations" element={<IsPrivate> <Accommodations /> </IsPrivate>}/>
             <Route path="/cities" element={<IsPrivate> <Cities /> </IsPrivate>}/>
+            <Route path="/request-trip" element={<IsPrivate> <RequestTripPage /> </IsPrivate>}/>
             <Route path="/add-trip" element={<IsPrivate> <CreateTripPage /> </IsPrivate>}/>
             <Route path="/trips/edit/:tripId/" element={<IsPrivate> <EditTripPage /> </IsPrivate>} />
             <Route path="*" element={<ErrorPage />} />

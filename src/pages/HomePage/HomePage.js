@@ -48,7 +48,7 @@ function HomePage() {
           work
         </h2>
         <Link to="/signup">
-        <Button variant="contained" color="primary">
+        <Button variant="contained" size="large" color="primary">
           Plan my trip
         </Button>
         </Link>

@@ -13,7 +13,7 @@ function Sidebar({ isAdmin }) {
         >
           {!isAdmin && (
             <>
-              <Link to={'/profile'}>
+              <Link to={'/request-trip'}>
                 <Button
                   variant="contained"
                   style={{ backgroundColor: '#4050B5', marginBottom: '30px' }}

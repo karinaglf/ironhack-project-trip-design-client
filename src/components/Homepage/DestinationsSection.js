@@ -71,7 +71,7 @@ function DestinationsSection({ city, index }) {
           ))}
         </Grid>
         <Link to="/signup">
-        <Button variant="contained" color="primary">
+        <Button size="large" variant="contained" color="primary">
           Start Planning
         </Button>
         </Link>

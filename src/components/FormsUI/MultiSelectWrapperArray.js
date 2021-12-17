@@ -29,7 +29,7 @@ function getStyles(item, selection, theme) {
   };
 }
 
-const MultiSelectWrapper = ({
+const MultiSelectWrapperArray = ({
   name,
   options,
   label,
@@ -83,10 +83,10 @@ const MultiSelectWrapper = ({
           )}
           MenuProps={MenuProps}
         >
-          {Object.keys(options).map((item, pos) => {
+          {options.map((item, pos) => {
         return (
           <MenuItem className={'select-multiple-menu'} sx={{padding: '10px'}} key={pos} value={item}>
-            {options[item]}
+            {item}
           </MenuItem>
           )
           })}
@@ -95,4 +95,4 @@ const MultiSelectWrapper = ({
     </div>
   );
 }
-export default MultiSelectWrapper;
+export default MultiSelectWrapperArray;

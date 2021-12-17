@@ -127,7 +127,7 @@ function AddTripForm() {
       //console.log(`Request Body`, values);
 
       setSubmitting(false);
-      navigate('/trips');
+      navigate('/profile');
     } catch (error) {
       console.log('Error while submitting create a trip form');
     }
