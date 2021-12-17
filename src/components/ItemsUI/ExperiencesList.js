@@ -26,10 +26,6 @@ function ExperiencesList() {
 
   useEffect(() => {
     getAllItems();
-  }, []);
-
-  useEffect(() => {
-    getAllItems();
   }, [isUpdated]);
 
   //Function - search foods from SearchFood,js
@@ -50,7 +46,7 @@ function ExperiencesList() {
             <SearchBar searchList={searchList}  type={'experiences'}/>
           </Grid>
           <Grid item xs={3}>
-            <AddItemDialog type={'experiences'} refreshList={getAllItems} />
+            <AddItemDialog type={'experiences'} setIsUpdated={setIsUpdated} isUpdated={isUpdated}/>
           </Grid>
         </Grid>
       </Box>

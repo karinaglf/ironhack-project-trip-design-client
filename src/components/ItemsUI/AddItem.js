@@ -11,7 +11,7 @@ import fileService from '../../services/file.service';
 
 const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
-function AddExperience({ refreshList, type, setOpen}) {
+function AddExperience({ setIsUpdated, isUpdated, type, setOpen}) {
   const [isUploaded, setIsUploaded] = useState(false);
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [cities, setCities] = useState();
@@ -64,7 +64,7 @@ function AddExperience({ refreshList, type, setOpen}) {
 
       setSubmitting(false);
       setOpen(false);
-      refreshList();
+      setIsUpdated(!isUpdated);
     } catch (error) {
       console.log('Error while submitting create a trip form');
     }

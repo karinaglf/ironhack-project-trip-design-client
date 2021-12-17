@@ -6,7 +6,10 @@ import SubmitButton from '../FormsUI/SubmitButtonWrapper';
 import DatePicker from '../FormsUI/DatePickerWrapper';
 import Select from '../FormsUI/SelectWrapper';
 import MultiSelect from '../FormsUI/MultiSelectWrapper';
+import SelectArray from '../FormsUI/SelectWrapperArray';
 import fileService from '../../services/file.service';
+import SelectMUI from '@mui/material/Select';
+
 
 import {
   Input,
@@ -27,6 +30,7 @@ function AddTripForm() {
   const [cities, setCities] = useState();
   const [accommodations, setAccommodations] = useState();
   const [experiences, setExperiences] = useState();
+  const [requests, setRequests] = useState();
   const [previewCover, setPreviewCover] = useState(
     'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800'
   );
@@ -42,6 +46,23 @@ function AddTripForm() {
       });
 
       setCities(citiesObj);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getAllRequests = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/api/requests`);
+
+      let pendingRequests = [];
+      response.data.forEach((item) => {
+        if (!item.tripPlan) {
+          pendingRequests.push(item._id)
+        }
+      });
+      setRequests(pendingRequests);
+      console.log(`requests`, requests)
     } catch (error) {
       console.log(error);
     }
@@ -70,7 +91,6 @@ function AddTripForm() {
       response.data.forEach((item) => {
         experiencesObj[item._id] = item.name;
       });
-      console.log(experiencesObj);
 
       setExperiences(experiencesObj);
     } catch (error) {
@@ -79,6 +99,7 @@ function AddTripForm() {
   };
 
   useEffect(() => {
+    getAllRequests();
     getAllCities();
     getAllAccommodations();
     getAllExperiences();
@@ -90,6 +111,7 @@ function AddTripForm() {
   const initialValues = {
     tripName: '',
     coverImg: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800',
+    request: '',
     startDate: '',
     endDate: '',
     duration: 3,
@@ -108,8 +130,6 @@ function AddTripForm() {
       },
     ],
   };
-
-  console.log(accommodations);
 
   //Form Validation Schema
   const validationSchema = Yup.object({
@@ -152,7 +172,7 @@ function AddTripForm() {
 
   return (
     <>
-      {cities && accommodations && experiences && (
+      {cities  && requests && accommodations && experiences && (
         <Grid container>
           <Grid item xs={12}>
             <h1>Create a Trip</h1>
@@ -182,9 +202,10 @@ function AddTripForm() {
                               <TextField name="tripName" label="Trip Name" />
                             </Grid>
                             <Grid item xs={12}>
-                              <TextField
-                                name="requestedBy"
-                                label="Requested By"
+                              <SelectArray
+                                name="request"
+                                label="Request Order"
+                                options={requests}
                               />
                             </Grid>
                             <Grid item xs={12}>

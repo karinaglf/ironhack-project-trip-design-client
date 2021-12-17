@@ -70,3 +70,11 @@ a:hover {
   font-size: 1.2rem !important;
   font-weight: 400 !important;
 }
+.sidebar { 
+  margin-top: 20px;
+}
+@media only screen and (max-width: 600px) {
+  .sidebar {
+    display: none;
+  }
+}

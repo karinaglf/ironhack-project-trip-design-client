@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { ListItem, List, ListItemText } from '@material-ui/core';
 import { Button } from '@mui/material';
 import { ChevronRight } from '@mui/icons-material';
+import AddItemDialog from '../../components/ItemsUI/AddItemDialog'
+import { Divider } from '@mui/material';
+
 
 function Sidebar({ isAdmin }) {
   return (
@@ -52,17 +55,21 @@ function Sidebar({ isAdmin }) {
           {isAdmin && (
             <>
 
-            <Link to={'/profile'}>
+            <Link to={'/add-trip'}>
                 <Button
                   variant="contained"
-                  style={{ backgroundColor: '#4050B5', marginBottom: '30px' }}
+                  style={{ backgroundColor: '#4050B5', width:'210px', marginBottom: '10px'}}
                   endIcon={<ChevronRight />}
                 >
-                  Dashboard
+                  Create a Trip
                 </Button>
               </Link>
+              <AddItemDialog type={'accommodations'} />
+              <AddItemDialog type={'experiences'} />
+              <AddItemDialog type={'cities'} />
 
-              <ListItem>
+
+              <ListItem style={{marginTop: '20px'}}>
                 <Link to={'/'}>
                   <ListItemText primary="Trips" />
                 </Link>

@@ -22,15 +22,15 @@ function AddItemDialog({type, id, isUpdated, setIsUpdated}) {
 
   return (
     <div>
-      <Button size="large" startIcon={<AddCircleIcon />} variant="outlined" onClick={handleClickOpen}>
-        Add {typeCapitalized}
+      <Button size="large" style={{justifyContent: "flex-start", width:'210px', margin: '5px 0'}} startIcon={<AddCircleIcon />} variant="outlined" onClick={handleClickOpen}>
+        {typeCapitalized}
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogActions>
           <Button onClick={handleClose}><CancelIcon /></Button>
         </DialogActions>
         <DialogContent>
-        <AddItem type={type} id={id} setOpen={setOpen}/>
+        <AddItem type={type} id={id} setOpen={setOpen} setIsUpdated={setIsUpdated} isUpdated={isUpdated}/>
         </DialogContent>
       </Dialog>
     </div>
