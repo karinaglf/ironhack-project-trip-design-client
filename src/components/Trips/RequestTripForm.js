@@ -80,24 +80,22 @@ function RequestTripForm() {
     requestedBy: user?._id,
     budgetPerPerson: '300',
     typeOfAccommodation: [],
-    specialOccasion: false,
     detailsOccasion: '',
-    activitiesInclude: [],
+    activitiesToInclude: [],
     specialRequest: '',
   };
 
   //Form Validation Schema
   const validationSchema = Yup.object({
-    destination: Yup.string().required(),
+    // destination: Yup.string().required(),
   });
 
   //Handle Submit
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      await axios.post(`${API_URL}/api/trips-request`, values);
+      await axios.post(`${API_URL}/api/requests`, values);
 
       //console.log(`Request Body`, values);
-
       setSubmitting(false);
       navigate('/profile');
     } catch (error) {
@@ -148,7 +146,7 @@ function RequestTripForm() {
                         </Grid>
 
                         <Grid item xs={4}>
-                          <TextField name="duration" label="Duration" />
+                          <TextField name="duration" label="Duration" type="number" />
                         </Grid>
 
                         <Grid item xs={6}>

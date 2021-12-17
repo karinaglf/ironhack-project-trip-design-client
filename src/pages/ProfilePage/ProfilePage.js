@@ -4,6 +4,7 @@ import { AuthContext } from '../../context/auth.context';
 import TripsCard from '../../components/Trips/TripCard';
 import userService from '../../services/user.service';
 import Sidebar from '../../components/Sidebar/Sidebar';
+import RequestsList from '../../components/Requests/RequestsList';
 
 // Material UI
 import { Grid, Button, Paper, Box } from '@material-ui/core';
@@ -14,7 +15,7 @@ function ProfilePage() {
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [isUpdated, setIsUpdated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [hasTrips, setHasTrips] = useState(false);
+  const [hasRequestedTrips, setHasRequestedTrips] = useState(false);
 
   const getUserInfo = async () => {
     try {
@@ -24,8 +25,8 @@ function ProfilePage() {
       if (response.data.role === 'admin') {
         setIsAdmin(true);
       }
-      if (response.data.createdTrips.length > 0) {
-        setHasTrips(true);
+      if (response.data.requestedTrips.length > 0) {
+        setHasRequestedTrips(true);
       }
     } catch (error) {
       setErrorMessage(error.response.data.message);
@@ -42,11 +43,11 @@ function ProfilePage() {
 
   console.log(currentUser);
   console.log(isAdmin);
-  console.log(`hasTrips`, hasTrips);
+  console.log(`hasTrips`, hasRequestedTrips);
 
   return (
     <main>
-    <div className='container'>
+    <div className='container'></div>
       <Grid container spacing={2}>
         <Grid item xs={12} md={2}>
         <aside className="drawer">
@@ -62,6 +63,8 @@ function ProfilePage() {
               <>
                 {/* Admin Section */}
                 <div>
+                <RequestsList />
+                <h2 style={{ textAlign: 'left' }}>Latest Trips Planned</h2>
                   <Grid container spacing={6}>
                     {currentUser.createdTrips.map((oneTrip) => (
                       <Grid key={oneTrip._id} item xs={6} md={3}>
@@ -79,11 +82,11 @@ function ProfilePage() {
               // Customer Section
               <>
                 <div>
-                  {hasTrips ? (
+                  {hasRequestedTrips ? (
                     <>
                       <div>
                         <Grid container spacing={6}>
-                          {currentUser.createdTrips.map((oneTrip) => (
+                          {currentUser.requestedTrips.map((oneTrip) => (
                             <Grid key={oneTrip._id} item xs={6} md={3}>
                               <TripsCard
                                 {...oneTrip}
@@ -106,7 +109,6 @@ function ProfilePage() {
           </Box>
         </Grid>
       </Grid>
-      </div>
     </main>
   );
 }

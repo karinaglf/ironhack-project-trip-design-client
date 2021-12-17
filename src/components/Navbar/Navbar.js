@@ -53,7 +53,7 @@ const Navbar = () => {
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            LOGO
+            TRIP DESIGN
           </Typography>
           </Link>
 
