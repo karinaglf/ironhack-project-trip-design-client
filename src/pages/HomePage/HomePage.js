@@ -2,10 +2,11 @@
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Box from '@mui/material/Box';
-import Typography from '@material-ui/core/Typography';
 import HeroImg from '../../assets/hero-6.jpg';
 import TripDesign from '../../assets/img-travel-memories.png';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
+import VerticalStepper from '../../components/Homepage/VerticalStepper'
+import DestinationsSection from '../../components/Homepage/DestinationsSection';
 
 const styleContainer = {
   height: 650,
@@ -19,8 +20,6 @@ const styleContainer = {
   boxShadow: 'inset 0 0 0 2000px rgba(32, 32,34, 0.3)',
   border: '1px solid black',
 };
-
-
 
 function HomePage() {
   return (
@@ -54,17 +53,17 @@ function HomePage() {
         </Button>
         </Link>
       </Box>
-      <Box styles={{padding: '80px'}}>
+      <Box sx={{ m:10}}>
         <h2>How does it works</h2>
         <Grid
+        className='how-works'
           container
-          sx={{
+          styles={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            m: 10 }}
+            marginTop: '50px' }}
           spacing={5}
-          styles={{marginTop:'80px'}}
         >
           <Grid item xs={6}>
             <img alt='trip design' src={TripDesign} />
@@ -72,9 +71,10 @@ function HomePage() {
           <Grid item xs={6}>
             <p
               style={{
-                fontSize: '1.2rem',
+                fontSize: '1.3rem',
                 lineHeight: '1.6',
-                textAlign: 'center',
+                textAlign: 'left',
+                marginTop: '80px',
               }}
             >
               You earned your vacation. Take the stress and uncertainty out of
@@ -82,9 +82,13 @@ function HomePage() {
               providing expertise and up-to-date travel trends from around the
               world.
             </p>
+            <VerticalStepper />
           </Grid>
         </Grid>
       </Box>
+
+      <DestinationsSection /> 
+
     </>
   );
 }

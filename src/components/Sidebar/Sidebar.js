@@ -69,7 +69,7 @@ function Sidebar({ isAdmin }) {
               </ListItem>
 
               <ListItem>
-                <Link to={'/destinations'}>
+                <Link to={'/cities'}>
                   <ListItemText primary="Destinations" />
                 </Link>
               </ListItem>

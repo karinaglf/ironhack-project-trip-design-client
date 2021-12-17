@@ -61,3 +61,7 @@ a:hover {
     padding: 20px 20px 30px;
     margin: 20px 0;
 }
+.MuiStepLabel-label {
+  font-size: 1.2rem !important;
+  font-weight: 400 !important;
+}
