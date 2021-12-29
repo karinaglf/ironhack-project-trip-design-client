@@ -44,8 +44,7 @@ function HomePage() {
           Customize your trip
         </h1>
         <h2 style={{ maxWidth: '800px', marginTop: '-10px' }}>
-          Go on a fabulous vacation planned just for you, and let us do all the
-          work
+          What about an amazing vacation customized just for you? Request a trip plan, we do the hard work, you enjoy it!
         </h2>
         <Link to="/signup">
         <Button variant="contained" size="large" color="primary">
@@ -65,10 +64,10 @@ function HomePage() {
             marginTop: '50px' }}
           spacing={5}
         >
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6} display={{ xs: "none"}}>
             <img alt='trip design' src={TripDesign} />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <p
               style={{
                 fontSize: '1.3rem',

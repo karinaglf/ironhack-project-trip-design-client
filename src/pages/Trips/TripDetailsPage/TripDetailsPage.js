@@ -22,8 +22,7 @@ function TripDetailsPage() {
   const getTrip = async () => {
     try {
       const response = await axios.get(`${API_URL}/api/trips/${tripId}`);
-      const oneTrip = response.data;
-      setTrip(oneTrip);
+      setTrip(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -33,7 +32,7 @@ function TripDetailsPage() {
     getTrip();
   }, []);
 
-  console.log(trip);
+  console.log(`THE TRIP`, trip)
 
   return (
     <>
@@ -47,11 +46,9 @@ function TripDetailsPage() {
             <TripCoverMsg {...trip}/>
 
 
-          <>
             {trip.destination.map((oneDestination, index) => {
               return <TripCitySection key={oneDestination._id} {...oneDestination} index={index}/>
             })}
-          </>
 
           <>
             {trip.days.map((oneDay, index) => {

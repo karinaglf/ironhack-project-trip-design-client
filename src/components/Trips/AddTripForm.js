@@ -111,7 +111,7 @@ function AddTripForm() {
   const initialValues = {
     tripName: '',
     coverImg: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800',
-    request: '',
+    requestedBy: '',
     startDate: '',
     endDate: '',
     duration: 3,
@@ -203,7 +203,7 @@ function AddTripForm() {
                             </Grid>
                             <Grid item xs={12}>
                               <SelectArray
-                                name="request"
+                                name="requestedBy"
                                 label="Request Order"
                                 options={requests}
                               />
@@ -408,7 +408,6 @@ function AddTripForm() {
                                       onClick={() =>
                                         push({
                                           experiences: [],
-                                          restaurants: [],
                                         })
                                       }
                                     >

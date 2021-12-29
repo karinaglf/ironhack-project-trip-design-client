@@ -6,6 +6,8 @@ function TripCitySection({ city, accommodations, index}) {
   console.log(accommodations);
 
   return (
+    <>
+    {city && (
     <Box sx={{ pt: 2, pb: 2, margin: '0 auto', mt: 5, mb: 5 }}>
       <Box
         sx={{
@@ -59,6 +61,8 @@ function TripCitySection({ city, accommodations, index}) {
           </Box>
           
     </Box>
+    )}
+    </>
   );
 }
 

@@ -16,14 +16,13 @@ const steps = [
   {
     label: 'We will design your trip',
     description:
-      'An ad group contains one or more ads which target a shared set of keywords.',
+      'Get paired 1-on-1 with an expert trip designer who gathers all the latest intel on your destination, and witness your dream vacation come to life.',
   },
   {
-    label: 'Get the trip plan',
-    description: `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`,
+    label: 'Get the trip plan and book yourself',
+    description: `Receive your tailored daily trip plan with lodging, dining and nightlife picks, along with a whole array of destination-specific attractions.
+
+    `,
   },
 ];
 
