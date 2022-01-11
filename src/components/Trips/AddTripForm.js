@@ -423,8 +423,6 @@ function AddTripForm() {
                         <Grid container justifyContent="center">
                           <Grid item xs={12}>
                             <SubmitButton>Submit Form</SubmitButton>
-                            <pre>{JSON.stringify(errors, null, 6)}</pre>
-                            <pre>{JSON.stringify(values, null, 6)}</pre>
                           </Grid>
                         </Grid>
                       </Grid>
