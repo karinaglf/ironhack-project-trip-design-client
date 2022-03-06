@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import ItemCard from './ItemCard';
-import AddItem from './AddItem';
-import EditItem from './EditItem';
-import { Grid, Button, Paper, Box } from '@material-ui/core';
+import { Grid, Box } from '@material-ui/core';
 import SearchBar from './SearchItem';
 import AddItemDialog from './AddItemDialog';
 

@@ -13,7 +13,7 @@ import {
 
 const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
-function ItemCard({ type, name, category, description, externalUrl, img, affiliateLink, _id, setIsUpdated, isUpdated }) {
+function ItemCard({ type, name, category, city, description, externalUrl, img, affiliateLink, _id, setIsUpdated, isUpdated }) {
 
   const deleteItem = async () => {
     try {
@@ -41,7 +41,7 @@ function ItemCard({ type, name, category, description, externalUrl, img, affilia
         {/* <Button size="small" href={`/${type}/${_id}`}>
           Details
         </Button> */}
-        <EditFormDialog type={`${type}`} id={_id}/>
+        <EditFormDialog type={`${type}`} id={_id} setIsUpdated={setIsUpdated} isUpdated={isUpdated} item={name, category, description, externalUrl, affiliateLink}/>
         <Button size="small" onClick={deleteItem}>
           Remove
         </Button>

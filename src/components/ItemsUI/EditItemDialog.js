@@ -27,7 +27,7 @@ function EditItemDialog({type, id, isUpdated, setIsUpdated}) {
           <Button onClick={handleClose}><CancelIcon /></Button>
         </DialogActions>
         <DialogContent>
-        <EditItem type={type} id={id} setOpen={setOpen}/>
+        <EditItem type={type} id={id} setOpen={setOpen} isUpdated={isUpdated} setIsUpdated={setIsUpdated}/>
         </DialogContent>
       </Dialog>
     </div>

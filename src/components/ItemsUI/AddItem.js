@@ -2,8 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { Grid, Box, Typography, Input, Button } from '@material-ui/core';
-import { useNavigate } from 'react-router-dom';
+import { Grid, Typography, Input, Button } from '@material-ui/core';
 import TextField from '../FormsUI/TextFieldWrapper';
 import SubmitButton from '../FormsUI/SubmitButtonWrapper';
 import Select from '../FormsUI/SelectWrapper';
@@ -15,8 +14,6 @@ function AddExperience({ setIsUpdated, isUpdated, type, setOpen, open }) {
 	const [isUploaded, setIsUploaded] = useState(false);
 	const [errorMessage, setErrorMessage] = useState(undefined);
 	const [cities, setCities] = useState();
-
-	const navigate = useNavigate();
 
 	const typeCapitalized = type.charAt(0).toUpperCase() + type.slice(1);
 
@@ -31,7 +28,7 @@ function AddExperience({ setIsUpdated, isUpdated, type, setOpen, open }) {
 
 			setCities(citiesObj);
 		} catch (error) {
-			console.log(error);
+			setErrorMessage(error);
 		}
 	};
 
@@ -58,13 +55,11 @@ function AddExperience({ setIsUpdated, isUpdated, type, setOpen, open }) {
 	//Handle Submit
 	const handleSubmit = async (values, { setSubmitting }) => {
 		try {
-			 await axios.post(`${API_URL}/api/${type}`, values);
-
+			await axios.post(`${API_URL}/api/${type}`, values);
 
 			setSubmitting(false);
-      setIsUpdated(!isUpdated);
+			setIsUpdated(!isUpdated);
 			setOpen(false);
-
 		} catch (error) {
 			console.log('Error while submitting add item form');
 		}

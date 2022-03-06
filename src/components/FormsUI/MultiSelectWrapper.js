@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -20,15 +19,6 @@ const MenuProps = {
   },
 };
 
-function getStyles(item, selection, theme) {
-  return {
-    fontWeight:
-      selection.indexOf(item) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
-
 const MultiSelectWrapper = ({
   name,
   options,
@@ -37,7 +27,6 @@ const MultiSelectWrapper = ({
 }) => {
   const { setFieldValue } = useFormikContext();
   const [field, meta] = useField(name);
-  const theme = useTheme();
   const [selection, setSelection] = React.useState([]);
 
   const handleChange = evt => {

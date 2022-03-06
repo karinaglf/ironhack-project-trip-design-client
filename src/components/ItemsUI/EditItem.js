@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Grid, Typography, Input, Button } from '@material-ui/core';
@@ -11,7 +11,7 @@ import fileService from '../../services/file.service';
 
 const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
-function EditItem({ type, id, setOpen }) {
+function EditItem({ type, id, setOpen, isUpdated, setIsUpdated }) {
   const [item, setItem] = useState(null);
   const [isUploaded, setIsUploaded] = useState(false);
   const [errorMessage, setErrorMessage] = useState(undefined);
@@ -70,6 +70,7 @@ function EditItem({ type, id, setOpen }) {
     try {
       await axios.put(`${API_URL}/api/${type}/${id}`, values);
 
+      setIsUpdated(!isUpdated)
       setSubmitting(false);
       setOpen(false);
     } catch (error) {

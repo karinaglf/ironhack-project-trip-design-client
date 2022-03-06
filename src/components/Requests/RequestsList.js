@@ -24,10 +24,6 @@ function RequestsList() {
 
   useEffect(() => {
     getAllItems();
-  }, []);
-
-  useEffect(() => {
-    getAllItems();
   }, [isUpdated]);
 
   return (
