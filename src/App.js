@@ -1,8 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
-
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
-
 import HomePage from './pages/HomePage/HomePage';
 import SignupPage from './pages/SignupPage/SignupPage';
 import LoginPage from './pages/LoginPage/LoginPage';
@@ -15,10 +13,8 @@ import EditTripPage from './pages/Trips/EditTripPage/EditTripPage';
 import Experiences from './pages/ItemsPage/ExperiencesPage';
 import Accommodations from './pages/ItemsPage/AccommodationsPage'
 import Cities from './pages/ItemsPage/CitiesPage'
-
 import IsPrivate from './components/IsPrivate/IsPrivate';
 import IsAnon from './components/IsAnon/IsAnon';
-
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';

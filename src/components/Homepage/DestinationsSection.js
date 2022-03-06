@@ -7,7 +7,6 @@ const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
 function DestinationsSection({ city, index }) {
   const [cities, setCities] = useState([]);
-  console.log(city);
 
   const getAllItems = async () => {
     try {
@@ -28,7 +27,7 @@ function DestinationsSection({ city, index }) {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
       }}
     >
       <Box
@@ -37,7 +36,7 @@ function DestinationsSection({ city, index }) {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          maxWidth: '1400px',
+          maxWidth: '900px',
         }}
       >
         <h2>Our Destinations</h2>

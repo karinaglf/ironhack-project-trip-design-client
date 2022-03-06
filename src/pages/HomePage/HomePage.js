@@ -8,19 +8,6 @@ import { Link} from 'react-router-dom';
 import VerticalStepper from '../../components/Homepage/VerticalStepper'
 import DestinationsSection from '../../components/Homepage/DestinationsSection';
 
-const styleContainer = {
-  height: 650,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  flexDirection: 'column',
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: 'cover',
-  backgroundPosition: 'bottom center',
-  boxShadow: 'inset 0 0 0 2000px rgba(32, 32,34, 0.3)',
-  border: '1px solid black',
-};
-
 function HomePage() {
   return (
     <>
@@ -44,7 +31,8 @@ function HomePage() {
           Customize your trip
         </h1>
         <h2 style={{ maxWidth: '800px', marginTop: '-10px' }}>
-          What about an amazing vacation customized just for you? Request a trip plan, we do the hard work, you enjoy it!
+        What about an amazing vacation customized for you?<br />
+        We plan the itinerary, you enjoy it!
         </h2>
         <Link to="/signup">
         <Button variant="contained" size="large" color="primary">
@@ -76,7 +64,7 @@ function HomePage() {
                 marginTop: '80px',
               }}
             >
-              You earned your vacation. Take the stress and uncertainty out of
+              Take the stress and uncertainty out of
               planning it by letting us make a trip guide just for you,
               providing expertise and up-to-date travel trends from around the
               world.
