@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -8,7 +8,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 function AddItemDialog({type, id, isUpdated, setIsUpdated}) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const typeCapitalized = type.charAt(0).toUpperCase() + type.slice(1)
 
@@ -30,7 +30,7 @@ function AddItemDialog({type, id, isUpdated, setIsUpdated}) {
           <Button onClick={handleClose}><CancelIcon /></Button>
         </DialogActions>
         <DialogContent>
-        <AddItem type={type} id={id} setOpen={setOpen} setIsUpdated={setIsUpdated} isUpdated={isUpdated}/>
+        <AddItem type={type} id={id} open={open} setOpen={setOpen} setIsUpdated={setIsUpdated} isUpdated={isUpdated}/>
         </DialogContent>
       </Dialog>
     </div>

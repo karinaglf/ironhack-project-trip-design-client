@@ -8,6 +8,8 @@ import { Divider } from '@mui/material';
 
 
 function Sidebar({ isAdmin }) {
+  const [isUpdated, setIsUpdated] = useState(false);
+
   return (
     <>
       <div className="sidebar">
@@ -64,9 +66,9 @@ function Sidebar({ isAdmin }) {
                   Create a Trip
                 </Button>
               </Link>
-              <AddItemDialog type={'accommodations'} />
-              <AddItemDialog type={'experiences'} />
-              <AddItemDialog type={'cities'} />
+              <AddItemDialog type={'accommodations'} isUpdated={isUpdated} setIsUpdated={setIsUpdated}/>
+              <AddItemDialog type={'experiences'} isUpdated={isUpdated} setIsUpdated={setIsUpdated}/>
+              <AddItemDialog type={'cities'} isUpdated={isUpdated} setIsUpdated={setIsUpdated}/>
 
 
               <ListItem style={{marginTop: '20px'}}>

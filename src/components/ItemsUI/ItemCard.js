@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-import tripsService from '../../services/file.service';
 import axios from 'axios';
 import EditFormDialog from './EditItemDialog';
 
@@ -32,7 +30,7 @@ function ItemCard({ type, name, category, description, externalUrl, img, affilia
         component="img"
         height="160"
         image={img}
-        alt="trip cover"
+        alt="item card cover"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -40,9 +38,9 @@ function ItemCard({ type, name, category, description, externalUrl, img, affilia
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" href={`/${type}/${_id}`}>
+        {/* <Button size="small" href={`/${type}/${_id}`}>
           Details
-        </Button>
+        </Button> */}
         <EditFormDialog type={`${type}`} id={_id}/>
         <Button size="small" onClick={deleteItem}>
           Remove

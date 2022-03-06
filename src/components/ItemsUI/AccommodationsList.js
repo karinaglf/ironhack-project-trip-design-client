@@ -26,10 +26,6 @@ function AccommodationsList() {
 
   useEffect(() => {
     getAllItems();
-  }, []);
-
-  useEffect(() => {
-    getAllItems();
   }, [isUpdated]);
 
   //Function - search foods from SearchFood,js
@@ -50,7 +46,7 @@ function AccommodationsList() {
             <SearchBar searchList={searchList}  type={'accommodations'}/>
           </Grid>
           <Grid item xs={3}>
-            <AddItemDialog type={'accommodations'} refreshList={getAllItems} />
+            <AddItemDialog type={'accommodations'} isUpdated={isUpdated} setIsUpdated={setIsUpdated} />
           </Grid>
         </Grid>
       </Box>

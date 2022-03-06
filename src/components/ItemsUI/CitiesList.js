@@ -48,7 +48,7 @@ function CitiesList() {
             <SearchBar searchList={searchList}  type={'cities'}/>
           </Grid>
           <Grid item xs={3}>
-            <AddItemDialog type={'cities'} refreshList={getAllItems} />
+            <AddItemDialog type={'cities'} isUpdated={isUpdated} setIsUpdated={setIsUpdated} />
           </Grid>
         </Grid>
       </Box>

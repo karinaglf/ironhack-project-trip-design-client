@@ -46,7 +46,7 @@ function ExperiencesList() {
             <SearchBar searchList={searchList}  type={'experiences'}/>
           </Grid>
           <Grid item xs={3}>
-            <AddItemDialog type={'experiences'} setIsUpdated={setIsUpdated} isUpdated={isUpdated}/>
+            <AddItemDialog type={'experiences'} isUpdated={isUpdated} setIsUpdated={setIsUpdated}/>
           </Grid>
         </Grid>
       </Box>
