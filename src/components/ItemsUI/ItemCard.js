@@ -41,7 +41,7 @@ function ItemCard({ type, name, category, city, description, externalUrl, img, a
         {/* <Button size="small" href={`/${type}/${_id}`}>
           Details
         </Button> */}
-        <EditFormDialog type={`${type}`} id={_id} setIsUpdated={setIsUpdated} isUpdated={isUpdated} item={name, category, description, externalUrl, affiliateLink}/>
+        <EditFormDialog type={`${type}`} id={_id} setIsUpdated={setIsUpdated} isUpdated={isUpdated} />
         <Button size="small" onClick={deleteItem}>
           Remove
         </Button>

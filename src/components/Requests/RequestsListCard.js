@@ -1,8 +1,7 @@
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import Avatar from '@mui/material/Avatar';
-import { Box, Grid, Button } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import RequestsDetailsDialog from './RequestsDetailsDialog';
 
 function RequestListCard({requestedBy, destination, timestamp, status, _id, pax}) {

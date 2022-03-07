@@ -10,7 +10,7 @@ import fileService from '../../services/file.service';
 
 const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
-function AddExperience({ setIsUpdated, isUpdated, type, setOpen, open }) {
+function AddItem({ setIsUpdated, isUpdated, type, setOpen, open }) {
 	const [isUploaded, setIsUploaded] = useState(false);
 	const [errorMessage, setErrorMessage] = useState(undefined);
 	const [cities, setCities] = useState();
@@ -75,7 +75,7 @@ function AddExperience({ setIsUpdated, isUpdated, type, setOpen, open }) {
 			const response = await fileService.uploadImage(uploadData);
 
 			setFieldValue('img', response.data.secure_url);
-			setIsUploaded('true');
+			setIsUploaded(!isUploaded);
 		} catch (error) {
 			console.log(error);
 		}
@@ -136,4 +136,4 @@ function AddExperience({ setIsUpdated, isUpdated, type, setOpen, open }) {
 	);
 }
 
-export default AddExperience;
+export default AddItem;

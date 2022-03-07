@@ -1,15 +1,10 @@
 import {
-  Container,
   Grid,
-  Typography,
   Box,
-  List,
   ListItem,
-  Divider,
   ListItemText,
 } from '@material-ui/core';
-import { useState, useEffect } from 'react';
-import { ListItemButton, ListItemIcon } from '@mui/material';
+import { ListItemIcon } from '@mui/material';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import MapIcon from '@mui/icons-material/Map';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
@@ -53,7 +48,7 @@ function TripHero({
             sx={{
               width: '100%',
               maxWidth: 680,
-              bgcolor: 'background.paper',
+              bgColor: 'background.paper',
               display: 'flex',
               padding: '20px 0',
               borderRadius: '10px',

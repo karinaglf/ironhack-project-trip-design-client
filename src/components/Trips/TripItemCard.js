@@ -1,6 +1,3 @@
-import { Link } from 'react-router-dom';
-import tripsService from '../../services/file.service';
-import axios from 'axios';
 
 // Material UI
 import {

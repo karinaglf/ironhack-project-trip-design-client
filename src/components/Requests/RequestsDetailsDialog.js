@@ -28,6 +28,7 @@ function RequestsDetailsDialog({type, _id, isUpdated, setIsUpdated}) {
 
   useEffect(() => {
     getRequest();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log(request);

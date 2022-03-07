@@ -1,4 +1,4 @@
-import { Box, Avatar, Grid } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import TripItemCard from './TripItemCard';
 
 function TripDaysSection({ experiences, index }) {

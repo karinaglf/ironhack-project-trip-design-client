@@ -6,8 +6,7 @@ import SubmitButton from '../FormsUI/SubmitButtonWrapper';
 import DatePicker from '../FormsUI/DatePickerWrapper';
 import MultiSelect from '../FormsUI/MultiSelectWrapper';
 import MultiSelectArray from '../FormsUI/MultiSelectWrapperArray';
-
-import { Grid, Container, Box } from '@material-ui/core';
+import { Grid, Container } from '@material-ui/core';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
@@ -36,7 +35,6 @@ const activitiesTypes = [
 ];
 
 function RequestTripForm() {
-	const [isUploaded, setIsUploaded] = useState(false);
 	const [cities, setCities] = useState();
 	const { user } = useContext(AuthContext);
 

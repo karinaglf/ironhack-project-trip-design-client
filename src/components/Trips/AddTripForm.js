@@ -8,7 +8,6 @@ import Select from '../FormsUI/SelectWrapper';
 import MultiSelect from '../FormsUI/MultiSelectWrapper';
 import SelectArray from '../FormsUI/SelectWrapperArray';
 import fileService from '../../services/file.service';
-import SelectMUI from '@mui/material/Select';
 
 
 import {
@@ -103,6 +102,7 @@ function AddTripForm() {
     getAllCities();
     getAllAccommodations();
     getAllExperiences();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const navigate = useNavigate();
@@ -111,7 +111,7 @@ function AddTripForm() {
   const initialValues = {
     tripName: '',
     coverImg: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800',
-    requestedBy: '',
+    request: '',
     startDate: '',
     endDate: '',
     duration: 3,
@@ -203,7 +203,7 @@ function AddTripForm() {
                             </Grid>
                             <Grid item xs={12}>
                               <SelectArray
-                                name="requestedBy"
+                                name="request"
                                 label="Request Order"
                                 options={requests}
                               />

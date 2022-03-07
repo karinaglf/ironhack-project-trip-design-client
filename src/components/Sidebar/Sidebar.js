@@ -4,8 +4,6 @@ import { ListItem, List, ListItemText } from '@material-ui/core';
 import { Button } from '@mui/material';
 import { ChevronRight } from '@mui/icons-material';
 import AddItemDialog from '../../components/ItemsUI/AddItemDialog'
-import { Divider } from '@mui/material';
-
 
 function Sidebar({ isAdmin }) {
   const [isUpdated, setIsUpdated] = useState(false);
