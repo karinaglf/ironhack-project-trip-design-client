@@ -7,7 +7,6 @@ const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5005';
 
 function RequestsList() {
   const [requests, setRequests] = useState([]);
-  // const [allRequests, setAllRequests] = useState([]);
   const [isUpdated, setIsUpdated] = useState(false);
 
   const getAllItems = async () => {

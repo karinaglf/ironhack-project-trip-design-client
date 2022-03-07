@@ -10,7 +10,7 @@ function RequestListCard({requestedBy, destination, timestamp, status, _id, pax}
   if(destination){ destinationArr = destination.map(item => item.name)};
 
   return (
-    <List disablePadding sx={{ width: '100%', bgcolor: 'background.paper' }}>
+    <List disablePadding sx={{ width: '100%' }}>
       <Box className='border-list-card'>
       <ListItem>
       <Grid container justifyContent='space-between' alignItems='center'>
@@ -20,6 +20,7 @@ function RequestListCard({requestedBy, destination, timestamp, status, _id, pax}
         </Box>
         </Grid>
         <Grid item>
+          <ListItemText sx={{paddingLeft: '5px' }} secondary={status.toUpperCase()} />
           <RequestsDetailsDialog _id={_id}/>
         </Grid>
         </Grid>

@@ -34,7 +34,8 @@ function ProfilePage() {
 
 	useEffect(() => {
 		getUserInfo();
-	}, []);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isUpdated]);
 
 	return (
 		<main>
