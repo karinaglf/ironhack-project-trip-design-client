@@ -48,7 +48,7 @@ function TripHero({
             sx={{
               width: '100%',
               maxWidth: 680,
-              bgColor: 'background.paper',
+              bgcolor: 'background.paper',
               display: 'flex',
               padding: '20px 0',
               borderRadius: '10px',
