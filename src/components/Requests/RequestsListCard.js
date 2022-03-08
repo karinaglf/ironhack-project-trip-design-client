@@ -4,7 +4,7 @@ import ListItemText from '@mui/material/ListItemText';
 import { Box, Grid } from '@material-ui/core';
 import RequestsDetailsDialog from './RequestsDetailsDialog';
 
-function RequestListCard({requestedBy, destination, timestamp, status, _id, pax}) {
+function RequestListCard({requestedBy, destination, status, _id, pax}) {
 
   let destinationArr
   if(destination){ destinationArr = destination.map(item => item.name)};
@@ -21,7 +21,7 @@ function RequestListCard({requestedBy, destination, timestamp, status, _id, pax}
         </Grid>
         <Grid item>
           <ListItemText sx={{paddingLeft: '5px' }} secondary={status.toUpperCase()} />
-          <RequestsDetailsDialog _id={_id}/>
+          <RequestsDetailsDialog _id={_id} destination={destinationArr}/>
         </Grid>
         </Grid>
       </ListItem>
