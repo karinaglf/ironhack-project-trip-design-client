@@ -12,7 +12,7 @@ A platform for travel advisors to create and share custom trip itineraries with 
 
 ## Login Credentials
 
- Use this login credential to see the admin view
+ Try the following login credential to see the admin view
 
 **Email:** Admin123@admin.com
 
@@ -22,12 +22,10 @@ A platform for travel advisors to create and share custom trip itineraries with 
 
 ## User Stories
 
--  **404:** As a user I want to see an aesthetic 404 page when I try to access a page that doesn’t exist, so that I know it was my fault.
--  **500:** As a user I want to see an aesthetic error page when the dev team screws it up, so that I know that is not my fault.
 -  **Signup:** As an anonymous user I can sign up on the platform.
 -  **Login:** As a user I can login to the platform so that I can access my profile and access the data I have access.
 -  **Logout:** As a logged in user I can logout from the platform so no one else can use it.
--  **Travel Advisor Profile:** As a travel advisor I want to be able to see recent activities in my profile, so I can have a glimpse of the latest requested trips that I need to create,  lasted trips I have created, and manage the database.
+-  **Travel Advisor Profile:** As a travel advisor I want to be able to see recent activities in my profile, so I can have a glimpse of the latest requested trips that I need to create, and manage the database.
 -  **Create Trips:** As a travel advisor I want to have a trip creation tool where I can add information day-by-day and select hotels and experiences, so I can easily create custom itineraries for my clients
 -  **Edit Trips:** As a travel advisor I want to be able to edit any itinerary I have created, so I can correct possible mistakes or adjust it after customer feedback.
 -  **Delete Trips:** As a travel advisor I want to be able to delete any itinerary I have created, so I can correct remove it from the database.
@@ -35,7 +33,7 @@ A platform for travel advisors to create and share custom trip itineraries with 
 -  **Accommodation Page:** As a travel advisor I want to be able to manage (see all, add new, edit and delete) the accommodations available in the database.
 -  **Experiences Page:** As a travel advisor I want to be able to manage (see all, add new, edit and delete) the experiences available in the database.
 -  **Customer Profile:** As a customer I want to be able to log in and have access to previous trip itineraries that have been created for me, so I can keep a history of all my trips.
--  **Trip Details:** As user with a valid trip itinerary llink I want to be able to access the details of the trip.
+-  **Trip Details:** As user with a valid trip itinerary link I want to be able to access the details of the trip.
 
 
 ## Backlog
@@ -289,10 +287,6 @@ A platform for travel advisors to create and share custom trip itineraries with 
 
 
 ## Links
-
-### Kanban
-
-[Notion Page](https://www.notion.so/karinaglf/Project-Trip-Design-bd8f13112f29435fab6e9748cbeca779)
 
 ### Git
 
