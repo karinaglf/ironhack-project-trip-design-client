@@ -45,7 +45,6 @@ A platform for travel advisors to create and share custom trip itineraries with 
 - Notify customers via email that the trip itinerary is ready, so they can check on the platform.
 - Show only list of hotels and experiences related to the specific city on add trip form
 - Google API - Maps and Places
-- <br>
 
 
 # Client / Frontend
@@ -293,6 +292,8 @@ A platform for travel advisors to create and share custom trip itineraries with 
 [Client repository Link](https://github.com/karinaglf/ironhack-project-trip-design-client)
 
 [Server repository Link](https://github.com/karinaglf/ironhack-project-trip-design-server)
+
+### Deploy
 
 [Deployed App Link](https://trip-design.netlify.app)
 
